@@ -1,0 +1,85 @@
+/* Modal Header */
+.modal-header {
+    background-color: #C4E3CB;
+    color: rgb(0, 0, 0);
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .modal-title {
+    font-size: 1.7rem;
+    padding-left: 1rem;
+  }
+  
+  /* Carousel */
+  .carousel-inner img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+  }
+  
+  /* Carousel Controls */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Modal Body */
+  .modal-body {
+    padding: 2rem;
+  }
+  
+  /* Hotel Image Container */
+  .hotel-image-container {
+    margin-bottom: 2rem; /* Adjust the margin to create space below the image */
+  }
+  
+  /* Form Styles */
+  .form-label {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #000000;
+    padding-top: 1rem;
+    
+  }
+  
+  .form-control {
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    padding: 0.75rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+  }
+  
+  .form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+  }
+  
+  /* Special Requests Textarea */
+  #requests {
+    height: 100px;
+    resize: none;
+  }
+  
+  /* Modal Footer */
+  .modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    padding: 1rem;
+  }
+  
+  /* Secondary Button */
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    border-radius: 4px;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+  

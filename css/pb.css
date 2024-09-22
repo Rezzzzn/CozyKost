@@ -1,0 +1,168 @@
+/* Mengatur font umum */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa; /* Warna latar belakang halaman */
+  color: #000; /* Warna teks utama */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Memastikan body mengambil setidaknya tinggi layar */
+  margin: 50px;
+}
+
+/* Konten utama */
+.main-content {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between; /* Menyebar konten utama di sisi kiri dan kanan */
+}
+
+/* Data Penghuni */
+.data-penghuni {
+  width: 60%; /* Lebar Data Penghuni */
+}
+
+/* Pesanan container */
+.pesanan {
+  background-color: #fff; /* Warna latar belakang putih untuk container */
+  padding: 20px;
+  border-radius: 8px; /* Sudut melengkung */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+  width: 30%; /* Lebar container pesanan */
+  margin-top: 20px; /* Jarak antara pesanan dan elemen di atasnya */
+}
+
+.pesanan a {
+  color: #007bff;
+}
+
+/* Gambar */
+.img-fluid {
+  border-radius: 8px; /* Sudut melengkung pada gambar */
+  width: 30%;
+  height: auto;
+  margin-right: 5px;
+}
+
+/* Form Select */
+.form-select {
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Radio Button */
+.form-check-input:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.form-check-label {
+  margin-left: 10px;
+}
+
+/* Gaya tambahan untuk modal scrollable */
+.modal-dialog-scrollable .modal-content {
+  max-height: 80vh; /* Maksimum tinggi modal */
+}
+
+.modal-body {
+  max-height: 60vh; /* Maksimum tinggi area konten modal */
+  overflow-y: auto; /* Menambahkan scroll jika konten lebih tinggi dari area */
+}
+
+/* Gaya tambahan untuk modal fasilitas */
+.modal-body ul {
+  padding: 0;
+  margin: 0;
+  list-style: none; /* Menghilangkan bullet points */
+}
+
+.modal-body li {
+  display: flex;
+  align-items: center;
+  padding: 30px 0;
+  border-bottom: 1px solid #e9ecef; /* Garis pemisah antar item */
+}
+
+.modal-body li:last-child {
+  border-bottom: none; /* Menghilangkan garis bawah di item terakhir */
+}
+
+.modal-body i {
+  font-size: 20px; /* Ukuran ikon */
+  margin-right: 20px; /* Jarak antara ikon dan teks */
+  color: #2a2a2a; /* Warna ikon */
+}
+
+.modal-body p {
+  margin: 0;
+}
+
+/* Gaya tambahan untuk modal pembayaran */
+.modal-body .form-check {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #e9ecef; /* Garis pemisah antar item */
+  padding: 30px;
+}
+
+.modal-body .form-check:last-child {
+  border-bottom: none; /* Menghilangkan garis bawah di item terakhir */
+}
+
+.modal-body .form-check-input {
+  margin-right: 10px; /* Jarak antara radio button dan label */
+  font-size: 18px; /* Ukuran radio button */
+}
+
+.modal-body .form-check-label {
+  font-size: 16px; /* Ukuran font label */
+}
+
+.modal-body .form-check-input:checked {
+  background-color: #198754;  /* Warna background jika dipilih */
+  border-color: #198754;  /* Warna border jika dipilih */
+}
+
+.modal-body .form-check-label i {
+  margin-right: 10px; /* Jarak antara ikon dan teks */
+  font-size: 20px; /* Ukuran ikon */
+  color: #198754; /* Warna ikon */
+}
+
+/* Gaya untuk dropdown sub-pilihan E-Wallet */
+.sub-options {
+  display: none; /* Sembunyikan dropdown secara default */
+  margin-top: 10px;
+  padding-left: 35px; /* Jarak dari sisi kiri */
+}
+
+.sub-options label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.sub-options .payment-icon {
+  width: 60px; /* Ukuran gambar ikon seragam */
+  height: 60px; /* Ukuran gambar ikon seragam */
+  margin-right: 10px; /* Jarak antara ikon dan teks */
+  object-fit: contain; /* Menjaga proporsi gambar */
+  display: block; /* Memastikan gambar tidak mempengaruhi layout */
+}
+
+.section-title {
+  font-size: 15px; /* Ubah ukuran font untuk "Pesan Kost" */
+  margin-top: 30px; /* Tambahkan margin atas untuk menurunkan teks */
+}
+
+h1.mb-5 {
+  font-size: 30px; /* Ubah ukuran font untuk "Pesanan Anda" */
+  margin-top: 5px; /* Tambahkan margin atas untuk menurunkan teks */
+}
+
+.navbar {
+  margin-bottom: 20px; /* Menambah ruang antara navbar dan konten berikutnya */
+}

@@ -1,0 +1,44 @@
+
+.modal-profile .modal-dialog {
+    max-width: 400px;
+}
+.modal-profile .modal-body {
+    text-align: center;
+}
+.modal-profile .user-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #777;
+    margin: 0 auto 15px; /* Menambahkan auto margin untuk pusatkan */
+    position: relative;
+    overflow: hidden;
+}
+.modal-profile .user-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.modal-profile .change-photo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+}
+.modal-profile input[type="file"] {
+    display: none;
+}
+.form-group input{
+    letter-spacing: 0.2em;
+}
