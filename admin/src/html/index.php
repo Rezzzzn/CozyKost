@@ -143,7 +143,7 @@ include("../../../php/koneksi.php");
                       <i class="ti ti-list-check fs-6"></i>
                       <p class="mb-0 fs-3">My Task</p>
                     </a>
-                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    <a href="../../../index.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                   </div>
                 </div>
               </li>
@@ -276,7 +276,7 @@ include("../../../php/koneksi.php");
                         <div class="rounded-circle-shape bg-success px-3 py-2 rounded-pill d-inline-flex align-items-center justify-content-center">
                           <iconify-icon icon="ic:baseline-attach-money" class="fs-7 text-white"></iconify-icon>
                         </div>
-                        <h6 class="mb-0 fs-4 fw-medium text-muted">Laba bersih</h6>
+                        <h6 class="mb-0 fs-4 fw-medium text-muted">Pendapatan</h6>
                       </div>
                       <div class="dropdown dropstart">
                         <a href="javascript:void(0)" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -291,7 +291,7 @@ include("../../../php/koneksi.php");
                     </div>
                     <div class="row align-items-center">
                       <div class="col-6">
-                        <h2 class="mb-6 fs-7">$400</h2>
+                        <h2 class="mb-6 fs-7">400</h2>
                         <span class="badge rounded-pill border border-muted fw-bold text-muted fs-2 py-1">+25% bulan lalu</span>
                       </div>
                       <div class="col-6">

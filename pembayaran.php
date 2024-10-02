@@ -111,7 +111,7 @@ $tgl_keluar = $row['tgl_keluar'];
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="landing page.html" class="nav-item nav-link active">Beranda</a>
+                    <a href="landing_page.php" class="nav-item nav-link active">Beranda</a>
                     <a href="#tentang-kami" class="nav-item nav-link">Tentang Kami</a>
                     <a href="#service" class="nav-item nav-link">Rooms</a>
                     <a href="#paket" class="nav-item nav-link">Paket</a>

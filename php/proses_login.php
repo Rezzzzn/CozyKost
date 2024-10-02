@@ -31,9 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['level'] = $user['level'];
 
                 // Redirect sesuai level user
-                if ($user['level'] == '1'||$user['level'] == '2') {
+                if ($user['level'] == '1' || $user['level'] == '2') {
                     header("Location: ../admin/src/html/index.php");
-                    
                 } else {
                     header("Location: ../landing_page.php");
                 }

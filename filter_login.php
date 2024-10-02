@@ -64,7 +64,7 @@
                 <div class="card text-center p-3" id="memberCard">
                     <div class="card-body">
                         <i class="fas fa-home fa-3x mb-3"></i>
-                        <h5 class="card-title">Member (Pemilik Kost)<span style="color:green">  Rp.30.000</span></h5>
+                        <h5 class="card-title">Member (Pemilik Kost)</h5>
                         <p class="card-text">Daftarkan dan kelola properti kost Anda.</p>
                     </div>
                 </div>

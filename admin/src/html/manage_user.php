@@ -1,6 +1,18 @@
 <?php
 session_start();
 include("../../../php/koneksi.php");
+
+
+// Cek apakah user sudah login dan memiliki level admin
+if (!isset($_SESSION['id_user']) || ($_SESSION['level'] != '1' && $_SESSION['level'] != '2')) {
+    // Jika tidak login atau bukan admin, redirect ke halaman login
+    header("Location: ../../landing_page.php");
+    exit();
+}
+
+// Query untuk menampilkan semua data user
+$query = "SELECT * FROM tbl_login";
+$result = $conn->query($query);
 ?>
 
 <!doctype html>
@@ -79,18 +91,6 @@ include("../../../php/koneksi.php");
                 </a>
               </li>
   
-              <!-- <li class="nav-small-cap">
-                <iconify-icon icon="solar:widget-add-line-duotone" class="nav-small-cap-icon fs-4"></iconify-icon>
-                <span class="hide-menu">Pendapatan</span>
-              </li>
-  
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="kamar.html" aria-expanded="false">
-                  <iconify-icon icon="rivet-icons:money"></iconify-icon>
-                  <span class="hide-menu">Pendapatan</span>
-                </a>
-              </li> -->
-  
               <?php if ($_SESSION['level'] == 1) { ?>
             <li class="nav-small-cap">
               <iconify-icon icon="solar:widget-add-line-duotone" class="nav-small-cap-icon fs-4"></iconify-icon>
@@ -163,225 +163,50 @@ include("../../../php/koneksi.php");
       <!--  Header End -->
 
   <!-- Main Content -->
-    <div class="container mt-5">
-    <h2 class="mb-4 text-left">Manage User</h2>
-    <div class="d-flex mb-3">
-      <div class="search-container">
-        <div class="search-bar" style="margin-left: 15px;">
-          <i class="fas fa-search"></i>
-          <input type="text" class="form-control" id="searchInput" placeholder="Search Kamar">
-        </div>
-      </div>
-
-    </div>
-    <div class="table-wrapper">
-      <div class="table-responsive">
-        <table class="table table-striped table-hover" id="kamarTable">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Foto</th>
-              <th scope="col">Email</th>
-              <th scope="col">Nama</th>
-              <th scope="col">Sandi</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Example Row -->
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../assets/images/kamar/example.jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>ssnyyq@gmail.com</td>
-              <td>ssnyyq</td>
-              <td>ikan</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../assets/images/kamar/example.jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>ssnyyq@gmail.com</td>
-              <td>ssnyyq</td>
-              <td>ikan</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../assets/images/kamar/example.jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>ssnyyq@gmail.com</td>
-              <td>ssnyyq</td>
-              <td>ikan</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../assets/images/kamar/example.jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>ssnyyq@gmail.com</td>
-              <td>ssnyyq</td>
-              <td>ikan</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../assets/images/kamar/example.jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>ssnyyq@gmail.com</td>
-              <td>ssnyyq</td>
-              <td>ikan</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../assets/images/kamar/example.jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>ssnyyq@gmail.com</td>
-              <td>ssnyyq</td>
-              <td>ikan</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../assets/images/kamar/example.jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>ssnyyq@gmail.com</td>
-              <td>ssnyyq</td>
-              <td>ikan</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../assets/images/kamar/example.jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>ssnyyq@gmail.com</td>
-              <td>ssnyyq</td>
-              <td>ikan</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../assets/images/kamar/example.jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>ssnyyq@gmail.com</td>
-              <td>ssnyyq</td>
-              <td>ikan</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../assets/images/kamar/example.jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>ssnyyq@gmail.com</td>
-              <td>ssnyyq</td>
-              <td>ikan</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../assets/images/kamar/example.jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>ssnyyq@gmail.com</td>
-              <td>ssnyyq</td>
-              <td>ikan</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <!-- More rows as needed -->
-          </tbody>
+  <div class="container mt-5">
+        <h1>Kelola User</h1>
+        <p>Selamat datang, <?php echo $_SESSION['nama']; ?>!</p>
+        
+        <!-- Tabel untuk menampilkan data user -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Sandi</th>
+                    <th>Level</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if ($result->num_rows > 0) {
+                    // Menampilkan data user dalam tabel
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['id_user'] . "</td>";
+                        echo "<td>" . $row['nama'] . "</td>";
+                        echo "<td>" . $row['email'] . "</td>";
+                        echo "<td>" . $row['sandi'] . "</td>";
+                        echo "<td>" . ($row['level'] == 1 ? 'Admin' : 'User') . "</td>";
+                        echo "<td>
+                                <a href='edit_user.php?id=" . $row['id_user'] . "' class='btn btn-warning' >
+                                <i class='fas fa-edit'></i>
+                                </a>
+                                <a href='delete_user.php?id=" . $row['id_user'] . "' class='btn btn-danger' onclick='return confirm(\"Hapus user ini?\")'>
+                                <i class='fas fa-trash-alt'></i>
+                                </a>
+                              </td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='5'>Tidak ada user yang ditemukan.</td></tr>";
+                }
+                ?>
+            </tbody>
         </table>
-      </div>
     </div>
-  </div>
 
   <!-- Modal for Add -->
   <div class="modal fade" id="addEditModal" tabindex="-1" aria-labelledby="addEditModalLabel" aria-hidden="true">

@@ -230,7 +230,7 @@ if (isset($_SESSION['nama'])) {
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class="section-title bg-white text-center text-success px-3">Kost</h6>
-                <h1 class="mb-5">Rooms</h1>
+                <h1 class="mb-5">Kamar</h1>
             </div>
             <div class="row g-4 justify-content-center">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -379,9 +379,9 @@ if (isset($_SESSION['nama'])) {
                             </div>
                             <p>Kamar mandi dalam  |  WiFi  |  AC  |  TV  </p>
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="detail.html" class="btn btn-sm btn-secondary px-3 border-end disabled" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
-                                <a href="#" class="btn btn-sm btn-secondary px-3 disabled" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
-                            </div>
+                            <a href="detail_user.php" class="btn btn-md btn-dark px-3 border-end disabled" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
+                            <a href="booking.php" class="btn btn-md btn-dark px-3 disabled" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -407,9 +407,9 @@ if (isset($_SESSION['nama'])) {
                             </div>
                             <p>AC  |  TV  |  WiFi  |  Parkiran</p>
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
-                                <a href="#" class="btn btn-sm btn-success px-3" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
-                            </div>
+                            <a href="detail_user.php" class="btn btn-md btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
+                            <a href="booking.php" class="btn btn-md btn-success px-3" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
+                        </div>
                         </div>
                     </div>
                 </div>                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -434,9 +434,9 @@ if (isset($_SESSION['nama'])) {
                             </div>
                             <p>AC  |  TV  |  WiFi  |  Parkiran</p>
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
-                                <a href="#" class="btn btn-sm btn-success px-3" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
-                            </div>
+                            <a href="detail_user.php" class="btn btn-md btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
+                            <a href="booking.php" class="btn btn-md btn-success px-3" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
+                        </div>
                         </div>
                     </div>
                 </div>     
@@ -465,9 +465,9 @@ if (isset($_SESSION['nama'])) {
                             </div>
                             <p>AC  |  TV  |  WiFi  |  Parkiran</p>
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="detail.html" class="btn btn-sm btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
-                                <a href="#" class="btn btn-sm btn-success px-3" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
-                            </div>
+                            <a href="detail_user.php" class="btn btn-md btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
+                            <a href="booking.php" class="btn btn-md btn-success px-3" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -494,9 +494,9 @@ if (isset($_SESSION['nama'])) {
                             </div>
                             <p>AC  |  TV  |  WiFi  |  Parkiran</p>
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
-                                <a href="#" class="btn btn-sm btn-success px-3" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
-                            </div>
+                            <a href="detail_user.php" class="btn btn-md btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
+                            <a href="booking.php" class="btn btn-md btn-success px-3" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -526,9 +526,9 @@ if (isset($_SESSION['nama'])) {
                             </div>
                             <p>Kamar mandi dalam  |  WiFi  |  AC  |  TV  </p>
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="detail.html" class="btn btn-sm btn-secondary px-3 border-end disabled" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
-                                <a href="#" class="btn btn-sm btn-secondary px-3 disabled" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
-                            </div>
+                            <a href="detail_user.php" class="btn btn-md btn-dark px-3 border-end disabled" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
+                            <a href="booking.php" class="btn btn-md btn-dark px-3 disabled" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -555,9 +555,9 @@ if (isset($_SESSION['nama'])) {
                             </div>
                             <p>AC  |  TV  |  WiFi  |  Parkiran</p>
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
-                                <a href="#" class="btn btn-sm btn-success px-3" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
-                            </div>
+                            <a href="detail_user.php" class="btn btn-md btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
+                            <a href="booking.php" class="btn btn-md btn-success px-3" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -586,9 +586,9 @@ if (isset($_SESSION['nama'])) {
                             </div>
                             <p>AC  |  TV  |  WiFi  |  Parkiran</p>
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="detail.html" class="btn btn-sm btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
-                                <a href="#" class="btn btn-sm btn-success px-3" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
-                            </div>
+                            <a href="detail_user.php" class="btn btn-md btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
+                            <a href="booking.php" class="btn btn-md btn-success px-3" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
+                        </div>
                         </div>
                     </div>
                 </div>

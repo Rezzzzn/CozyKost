@@ -153,7 +153,7 @@ include("../../../php/koneksi.php");
                       <i class="ti ti-list-check fs-6"></i>
                       <p class="mb-0 fs-3">My Task</p>
                     </a>
-                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    <a href="../../../index.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                   </div>
                 </div>
               </li>
@@ -197,7 +197,7 @@ include("../../../php/koneksi.php");
             <!-- Example Row -->
             <tr>
               <th scope="row">2</th>
-              <td><img src="../../../asset/farros adi .jpg" alt="Kamar" class="img-thumbnail"></td>
+              <td><img src="../../../asset/image 6.png" alt="Kamar" class="img-thumbnail"></td>
               <td>UdinKost</td>
               <td>Kamar luas dengan fasilitas lengkap.</td>
               <td>Jl. Merdeka No. 10</td>
@@ -214,92 +214,7 @@ include("../../../php/koneksi.php");
             </tr>
             <tr>
               <th scope="row">2</th>
-              <td><img src="../../../asset/farros adi .jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>UdinKost</td>
-              <td>Kamar luas dengan fasilitas lengkap.</td>
-              <td>Jl. Merdeka No. 10</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../../../asset/farros adi .jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>UdinKost</td>
-              <td>Kamar luas dengan fasilitas lengkap.</td>
-              <td>Jl. Merdeka No. 10</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../../../asset/farros adi .jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>UdinKost</td>
-              <td>Kamar luas dengan fasilitas lengkap.</td>
-              <td>Jl. Merdeka No. 10</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../../../asset/farros adi .jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>UdinKost</td>
-              <td>Kamar luas dengan fasilitas lengkap.</td>
-              <td>Jl. Merdeka No. 10</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../../../asset/farros adi .jpg" alt="Kamar" class="img-thumbnail"></td>
-              <td>UdinKost</td>
-              <td>Kamar luas dengan fasilitas lengkap.</td>
-              <td>Jl. Merdeka No. 10</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../../../asset/farros adi .jpg" alt="Kamar" class="img-thumbnail"></td>
+              <td><img src="../../../asset/image 6.png" alt="Kamar" class="img-thumbnail"></td>
               <td>UdinKost</td>
               <td>Kamar luas dengan fasilitas lengkap.</td>
               <td>Jl. Merdeka No. 10</td>

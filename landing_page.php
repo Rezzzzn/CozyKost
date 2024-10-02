@@ -396,7 +396,7 @@ if (isset($_SESSION['nama'])) {
                         </div>
                         <p>Kamar mandi dalam  | AC  |  TV </p>
                         <div class="d-flex justify-content-center mb-2">
-                            <a href="detail user.html" class="btn btn-md btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
+                            <a href="detail_user.php" class="btn btn-md btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
                             <a href="booking.php" class="btn btn-md btn-success px-3" style="border-radius: 0 30px 30px 0;">Booking Sekarang</a>
                         </div>
                     </div>
@@ -462,8 +462,8 @@ if (isset($_SESSION['nama'])) {
                         </div>
                         <p>AC  |  TV  |  WiFi  |  Parkiran</p>
                         <div class="d-flex justify-content-center mb-2">
-                        <a href="detail user.html" class="btn btn-md btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
-                        <a href="booking.html" class="btn btn-md btn-success px-3" style="border-radius: 0 30px 30px 0;" data-bs-toggle="modal" data-bs-target="#bookingModal">Booking Sekarang</a>
+                        <a href="detail_user.php" class="btn btn-md btn-success px-3 border-end" style="border-radius: 30px 0 0 30px;">Pelajari Selengkapnya</a>
+                        <a href="booking.php" class="btn btn-md btn-success px-3" style="border-radius: 0 30px 30px 0;" data-bs-toggle="modal" data-bs-target="#bookingModal">Booking Sekarang</a>
                         </div>
                     </div>
                 </div>
