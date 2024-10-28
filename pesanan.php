@@ -146,10 +146,10 @@
                         <p class="mb-1"><?php echo date('j F Y', strtotime($tgl_masuk)); ?> - <?php echo date('j F Y', strtotime($tgl_keluar)); ?></p>
                         <hr>
                         <div class="mb-2 text-start">
-                            <img src="asset/image 2.png" alt="Kamar" class="img-fluid">
-                            <img src="asset/image 3.png" alt="Kamar" class="img-fluid">
-                            <img src="asset/image 4.png" alt="Kamar" class="img-fluid">
-                        </div>
+                    <img src="asset/image 2.png" alt="Kamar" class="img-fluid kamar">
+                    <img src="asset/image 3.png" alt="Kamar" class="img-fluid kamar">
+
+                </div>
                         <p class="mb-1 mt-2">Kamar kamu</p>
                         <p class="mb-1"><strong>Farros Stay House</strong></p>
                         <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#facilitiesModal">Lihat Fasilitas</a>

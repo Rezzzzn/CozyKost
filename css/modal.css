@@ -42,3 +42,7 @@
 .form-group input{
     letter-spacing: 0.2em;
 }
+
+.fasilitas {
+    margin-bottom: 20px; /* Beri jarak antar elemen */
+}

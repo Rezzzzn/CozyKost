@@ -174,7 +174,6 @@ $result = $conn->query($query);
                     <th>No</th>
                     <th>Nama</th>
                     <th>Email</th>
-                    <th>Sandi</th>
                     <th>Level</th>
                     <th>Aksi</th>
                 </tr>
@@ -188,12 +187,9 @@ $result = $conn->query($query);
                         echo "<td>" . $row['id_user'] . "</td>";
                         echo "<td>" . $row['nama'] . "</td>";
                         echo "<td>" . $row['email'] . "</td>";
-                        echo "<td>" . $row['sandi'] . "</td>";
                         echo "<td>" . ($row['level'] == 1 ? 'Admin' : 'User') . "</td>";
                         echo "<td>
-                                <a href='edit_user.php?id=" . $row['id_user'] . "' class='btn btn-warning' >
-                                <i class='fas fa-edit'></i>
-                                </a>
+                        
                                 <a href='delete_user.php?id=" . $row['id_user'] . "' class='btn btn-danger' onclick='return confirm(\"Hapus user ini?\")'>
                                 <i class='fas fa-trash-alt'></i>
                                 </a>

@@ -38,7 +38,7 @@ body {
 }
 
 /* Gambar */
-.img-fluid {
+.kamar {
   border-radius: 8px; /* Sudut melengkung pada gambar */
   width: 30%;
   height: auto;
@@ -166,3 +166,4 @@ h1.mb-5 {
 .navbar {
   margin-bottom: 20px; /* Menambah ruang antara navbar dan konten berikutnya */
 }
+

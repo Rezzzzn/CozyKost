@@ -68,7 +68,7 @@ include("../../../php/koneksi.php");
 
             <!-- Kamar Section -->
             <li class="sidebar-item">
-              <a class="sidebar-link" href="kamar.php" aria-expanded="false">
+              <a class="sidebar-link" href="read_kamar.php" aria-expanded="false">
                 <iconify-icon icon="material-symbols:bed"></iconify-icon>
                 <span class="hide-menu">Kamar</span>
               </a>
