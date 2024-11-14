@@ -30,12 +30,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fasilitas = $_POST['fasilitas'];
     $status = $_POST['status'];
 
+    $diskon = '0%';
+
+    // Hitung diskon
+    if ($durasi == '12') {
+        $diskon = '20%'; // Diskon 20%
+    } elseif ($durasi == '6') {
+        $diskon = '10%'; // Diskon 10%
+    }       
+
     // Proses upload gambar
     $gambar1 = $_FILES['gambar1']['name'];
     $gambar2 = $_FILES['gambar2']['name'];
     $gambar3 = $_FILES['gambar3']['name'];
     $gambar4 = $_FILES['gambar4']['name'];
-    
+
     // Lokasi upload
     $target_dir = "../../../uploads/";
 
@@ -70,6 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         kapasitas = '$kapasitas', 
         fasilitas = '$fasilitas', 
         status = '$status', 
+        diskon = '$diskon', 
         gambar1 = '$gambar1', 
         gambar2 = '$gambar2', 
         gambar3 = '$gambar3', 
@@ -77,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         WHERE id = $id";
 
     if ($conn->query($update_sql) === TRUE) {
-        echo "Data kamar berhasil diupdate. <a href='read_kamar.php'>Kembali ke Daftar Kamar</a>";
+        $success_message = "Data kamar berhasil diupdate. <a href='read_kamar.php'>Kembali</a>";
     } else {
         echo "Error: " . $conn->error;
     }
@@ -90,60 +100,86 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/createkamar.css">
     <title>Edit Kamar</title>
 </head>
 
 <body>
-    <h2>Edit Kamar</h2>
 
-    <form method="post" enctype="multipart/form-data">
-        <label for="nama_kost">Nama Kost:</label><br>
-        <input type="text" id="nama_kost" name="nama_kost" value="<?php echo $row['nama_kost']; ?>" required><br>
+    <div class="container">
+        <h3>Edit Kamar Kost</h3>
 
-        <label for="harga">Harga:</label><br>
-        <input type="text" id="harga" name="harga" value="<?php echo $row['harga']; ?>" required><br>
-
-        <label for="alamat">Alamat:</label><br>
-        <input type="text" id="alamat" name="alamat" value="<?php echo $row['alamat']; ?>" required><br>
-
-        <label for="durasi">Durasi:</label><br>
-        <input type="text" id="durasi" name="durasi" value="<?php echo $row['durasi']; ?>" required><br>
-
-        <label for="kapasitas">Kapasitas:</label><br>
-        <input type="text" id="kapasitas" name="kapasitas" value="<?php echo $row['kapasitas']; ?>" required><br>
-
-        <label for="fasilitas">Fasilitas:</label><br>
-        <input type="text" id="fasilitas" name="fasilitas" value="<?php echo $row['fasilitas']; ?>" required><br>
-
-        <label for="status">Status:</label><br>
-        <input type="text" id="status" name="status" value="<?php echo $row['status']; ?>" required><br>
-
-        <label for="gambar1">Gambar 1:</label><br>
-        <input type="file" id="gambar1" name="gambar1"><br>
-        <?php if ($row['gambar1']) { ?>
-            <img src='../../../uploads/<?php echo $row['gambar1']; ?>' alt='Gambar 1' style='width:100px; height:auto;'><br>
+        <!-- Tampilkan pesan sukses jika ada -->
+        <?php if (!empty($success_message)) { ?>
+            <p class="alert alert-success"><?php echo $success_message; ?></p>
         <?php } ?>
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="form-grid">
+                <div class="field">
+                    <label>Nama Kost</label>
+                    <input type="text" id="nama_kost" name="nama_kost" value="<?php echo $row['nama_kost']; ?>" required><br>
+                </div>
+                <div class="field">
+                    <label>Harga</label>
+                    <input type="text" id="harga" name="harga" value="<?php echo $row['harga']; ?>" required><br>
+                </div>
+                <div class="field full-width">
+                    <label>Alamat</label>
+                    <input type="text" id="alamat" name="alamat" value="<?php echo $row['alamat']; ?>" required><br>
+                </div>
+                <div class="field">
+                    <label>Durasi</label>
+                    <input type="text" id="durasi" name="durasi" value="<?php echo $row['durasi']; ?>" required><br>
+                </div>
+                <div class="field">
+                    <label>Kapasitas</label>
+                    <input type="text" id="kapasitas" name="kapasitas" value="<?php echo $row['kapasitas']; ?>" required><br>
+                </div>
+                <div class="field full-width">
+                    <label>Fasilitas</label>
+                    <input type="textarea" id="fasilitas" name="fasilitas" value="<?php echo $row['fasilitas']; ?>" required><br>
+                </div>
+                <div class="field full-width">
+                    <label>Status</label>
+                    <select name="status">
+                        <option value="Tersedia" <?php echo $row['status'] == 'Tersedia' ? 'selected' : ''; ?>>Tersedia</option>
+                        <option value="Tidak Tersedia" <?php echo $row['status'] == 'Tidak Tersedia' ? 'selected' : ''; ?>>Tidak Tersedia</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Gambar 1</label>
+                    <input type="file" name="gambar1">
+                    <?php if ($row['gambar1']) { ?>
+                        <img src='../../../uploads/<?php echo $row['gambar1']; ?>' alt='Gambar 1' style='width:250px; height:auto;'><br>
+                    <?php } ?>
+                </div>
+                <div class="field">
+                    <label>Gambar 2</label>
+                    <input type="file" name="gambar2">
+                    <?php if ($row['gambar2']) { ?>
+                        <img src='../../../uploads/<?php echo $row['gambar2']; ?>' alt='Gambar 2' style='width:250px; height:auto;'><br>
+                    <?php } ?>
+                </div>
+                <div class="field">
+                    <label>Gambar 3</label>
+                    <input type="file" name="gambar3">
+                    <?php if ($row['gambar3']) { ?>
+                        <img src='../../../uploads/<?php echo $row['gambar3']; ?>' alt='Gambar 3' style='width:250px; height:auto;'><br>
+                    <?php } ?>
+                </div>
+                <div class="field">
+                    <label>Gambar 4</label>
+                    <input type="file" name="gambar4">
+                    <?php if ($row['gambar4']) { ?>
+                        <img src='../../../uploads/<?php echo $row['gambar4']; ?>' alt='Gambar 4' style='width:250px; height:auto;'><br>
+                    <?php } ?>
+                </div>
+            </div>
+            <button type="submit" name="submit" class="submit-btn" style="margin-bottom:2rem;">Edit Kamar</button>
+        </form>
+    </div>
 
-        <label for="gambar2">Gambar 2:</label><br>
-        <input type="file" id="gambar2" name="gambar2"><br>
-        <?php if ($row['gambar2']) { ?>
-            <img src='../../../uploads/<?php echo $row['gambar2']; ?>' alt='Gambar 2' style='width:100px; height:auto;'><br>
-        <?php } ?>
-
-        <label for="gambar3">Gambar 3:</label><br>
-        <input type="file" id="gambar3" name="gambar3"><br>
-        <?php if ($row['gambar3']) { ?>
-            <img src='../../../uploads/<?php echo $row['gambar3']; ?>' alt='Gambar 3' style='width:100px; height:auto;'><br>
-        <?php } ?>
-
-        <label for="gambar4">Gambar 4:</label><br>
-        <input type="file" id="gambar4" name="gambar4"><br>
-        <?php if ($row['gambar4']) { ?>
-            <img src='../../../uploads/<?php echo $row['gambar4']; ?>' alt='Gambar 4' style='width:100px; height:auto;'><br>
-        <?php } ?>
-
-        <input type="submit" value="Update Kamar">
-    </form>
 </body>
 
 </html>

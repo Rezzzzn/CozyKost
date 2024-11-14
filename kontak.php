@@ -50,121 +50,121 @@ if (isset($_SESSION['nama'])) {
 </head>
 
 <body>
-        <!-- Modal -->
-        <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="bookingModalLabel">Pesan Kost</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body " >
-                        <!-- Carousel -->
-                        <div id="hotelCarousel" class="carousel slide">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="asset/Kamar 77.png" alt="Hotel Image 1">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="asset/image 5...png" alt="Hotel Image 2">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="asset/image 6.png" alt="Hotel Image 3">
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">kembali</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">selanjutnya</span>
-                            </button>
-                        </div>
-    
-                        <form action="php/save_booking.php" method="post">
-                            <!-- Check-in Date -->
-                            <div class="mb-3">
-                                <label for="checkInDate" class="form-label">Tanggal masuk</label>
-                                <input type="date" class="form-control" id="checkInDate" name="tgl_masuk">
-                            </div>
-    
-                            <!-- Check-out Date -->
-                            <div class="mb-3">
-                                <label for="checkOutDate" class="form-label">Tanggal keluar</label>
-                                <input type="date" class="form-control" id="checkOutDate" name="tgl_keluar">
-                            </div>
-    
-                            <!-- Special Requests -->
-                            <div class="mb-3">
-                                <label for="requests" class="form-label">permintaan khusus</label>
-                                <textarea class="form-control" name="permintaan_khusus" id="requests" rows="3" placeholder="tap untuk mengetik"></textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                            <input type="submit" class="btn btn-success" style="border-radius: 4px;" value="Lanjut ke Pembayaran"></input>
-                            <!-- <a href="pembayaran.html" class="btn btn-success" style="border-radius: 4px;">Lanjut ke Pembayaran</a> -->
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal fade modal-profile" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
-            <div class="modal-header d-flex justify-content-between align-items-center">
-                <!-- Modal title -->
-                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
-                <!-- Close button -->
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- User logo and name -->
-                <label for="profilePhotoInput" class="user-logo">
-                <img src="asset/farros adi .jpg" alt="Profile Photo">
-                <div class="change-photo">Change Photo</div>
-                </label>
-                <input type="file" id="profilePhotoInput" accept="asset">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalLabel">Pesan Kost</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                    <!-- Carousel -->
+                    <div id="hotelCarousel" class="carousel slide">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="asset/Kamar 77.png" alt="Hotel Image 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="asset/image 5...png" alt="Hotel Image 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="asset/image 6.png" alt="Hotel Image 3">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">kembali</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">selanjutnya</span>
+                        </button>
+                    </div>
 
-                <h5>Profile</h5><br>
+                    <form action="php/save_booking.php" method="post">
+                        <!-- Check-in Date -->
+                        <div class="mb-3">
+                            <label for="checkInDate" class="form-label">Tanggal masuk</label>
+                            <input type="date" class="form-control" id="checkInDate" name="tgl_masuk">
+                        </div>
 
-                <!-- Profile edit form -->
-                <form>
-                <div class="form-group mb-3">
-                    <input type="email" class="form-control" id="username" placeholder=" &#xf0e0;   Email" style="margin-bottom: -10px;font-family: 'Arial', FontAwesome;">
+                        <!-- Check-out Date -->
+                        <div class="mb-3">
+                            <label for="checkOutDate" class="form-label">Tanggal keluar</label>
+                            <input type="date" class="form-control" id="checkOutDate" name="tgl_keluar">
+                        </div>
+
+                        <!-- Special Requests -->
+                        <div class="mb-3">
+                            <label for="requests" class="form-label">permintaan khusus</label>
+                            <textarea class="form-control" name="permintaan_khusus" id="requests" rows="3" placeholder="tap untuk mengetik"></textarea>
+                        </div>
                 </div>
-                <div class="form-group mb-3">
-                    <input type="text" class="form-control" id="username" placeholder=" &#xf007;   Username" style="margin-bottom: -10px;font-family: 'Arial', FontAwesome;">
-                </div>
-                <div class="form-group mb-3">
-                    <input type="password" class="form-control" id="password" placeholder=" &#xf023;   New Password" style="margin-bottom: -10px;font-family: 'Arial', FontAwesome;">
-                </div>
-                <div class="form-group mb-3">
-                    <input type="password" class="form-control" id="confirmPassword" placeholder=" &#xf023;   Confirm Password" style="margin-bottom: -10px;font-family: 'Arial', FontAwesome;">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                    <input type="submit" class="btn btn-success" style="border-radius: 4px;" value="Lanjut ke Pembayaran"></input>
+                    <!-- <a href="pembayaran.html" class="btn btn-success" style="border-radius: 4px;">Lanjut ke Pembayaran</a> -->
                 </div>
                 </form>
             </div>
-            <div class="modal-footer">
-            <!-- Icon Logout -->
-                <button type="button" class="btn btn-danger me-auto" id="logoutBtn" style="border-radius: 10px;">
-                <i class="fas fa-right-to-bracket"></i>
-                </button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" style="border-radius: 10px;">Save changes</button>
-            </div>
-            </div>
         </div>
-        </div>
+    </div>
 
-        <script>
+
+    <div class="modal fade modal-profile" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <!-- Modal title -->
+                    <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                    <!-- Close button -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- User logo and name -->
+                    <label for="profilePhotoInput" class="user-logo">
+                        <img src="asset/farros adi .jpg" alt="Profile Photo">
+                        <div class="change-photo">Change Photo</div>
+                    </label>
+                    <input type="file" id="profilePhotoInput" accept="asset">
+
+                    <h5>Profile</h5><br>
+
+                    <!-- Profile edit form -->
+                    <form>
+                        <div class="form-group mb-3">
+                            <input type="email" class="form-control" id="username" placeholder=" &#xf0e0;   Email" style="margin-bottom: -10px;font-family: 'Arial', FontAwesome;">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" id="username" placeholder=" &#xf007;   Username" style="margin-bottom: -10px;font-family: 'Arial', FontAwesome;">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="password" class="form-control" id="password" placeholder=" &#xf023;   New Password" style="margin-bottom: -10px;font-family: 'Arial', FontAwesome;">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="password" class="form-control" id="confirmPassword" placeholder=" &#xf023;   Confirm Password" style="margin-bottom: -10px;font-family: 'Arial', FontAwesome;">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- Icon Logout -->
+                    <button type="button" class="btn btn-danger me-auto" id="logoutBtn" style="border-radius: 10px;">
+                        <i class="fas fa-right-to-bracket"></i>
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" style="border-radius: 10px;">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
         document.getElementById('logoutBtn').addEventListener('click', function() {
             // Arahkan ke halaman logout atau lakukan proses logout
             window.location.href = 'index.html'; // Ganti ini dengan URL atau script logout Anda
         });
-        </script>
+    </script>
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
@@ -201,7 +201,7 @@ if (isset($_SESSION['nama'])) {
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
             <a href="" class="navbar-brand p-0">
-                <img src="asset/COZYKOST LOGO.png" alt="Logo"> 
+                <img src="asset/COZYKOST LOGO.png" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
@@ -214,9 +214,9 @@ if (isset($_SESSION['nama'])) {
                     <!-- <a href="#paket" class="nav-item nav-link">Paket</a> -->
                     <a href="pesanan.php" class="nav-item nav-link">Pesanan</a>
                     <a href="kontak.php" class="nav-item nav-link active">Kontak</a>
-                    <a href="" style="font-size: large" class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#editProfileModal"><i class="fas fa-user me-2" ></i><?php echo isset($_SESSION['nama']) ? $_SESSION['nama'] : 'Guest'; ?></a>
+                    <a href="" style="font-size: large" class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#editProfileModal"><i class="fas fa-user me-2"></i><?php echo isset($_SESSION['nama']) ? $_SESSION['nama'] : 'Guest'; ?></a>
                 </div>
-            </div> 
+            </div>
         </nav>
 
         <div class="container-fluid bg-primary py-5 mb-5 hero-header">
@@ -273,39 +273,34 @@ if (isset($_SESSION['nama'])) {
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <iframe class="position-relative rounded w-100 h-100"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.138033933654!2d112.61452527500823!3d-8.087402591941075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e789e00fe4e738f%3A0x3094805dc97ad38b!2sGg.%20Pos%2C%20Ngebyongan%2C%20Wonokerso%2C%20Kec.%20Pakisaji%2C%20Kabupaten%20Malang%2C%20Jawa%20Timur%2065162!5e0!3m2!1sid!2sid!4v1725542041464!5m2!1sid!2sid" 
-                        width="600" 
-                        height="450" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.138033933654!2d112.61452527500823!3d-8.087402591941075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e789e00fe4e738f%3A0x3094805dc97ad38b!2sGg.%20Pos%2C%20Ngebyongan%2C%20Wonokerso%2C%20Kec.%20Pakisaji%2C%20Kabupaten%20Malang%2C%20Jawa%20Timur%2065162!5e0!3m2!1sid!2sid!4v1725542041464!5m2!1sid!2sid"
+                        width="600"
+                        height="450"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
                 <div class="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
-                    <form>
+                    <form id="contactForm">
+                        <div id="responseMessage"></div> <!-- Tempat untuk menampilkan pesan respon -->
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                    <input type="text" class="form-control" id="name" name="nama" placeholder="Your Name" required>
                                     <label for="name">Nama</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
                                     <label for="email">Email</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                    <label for="subject">Subjek</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 100px"></textarea>
+                                    <textarea class="form-control" placeholder="Leave a message here" id="message" name="pesan" style="height: 180px" required></textarea>
                                     <label for="message">Pesan..</label>
                                 </div>
                             </div>
@@ -314,6 +309,7 @@ if (isset($_SESSION['nama'])) {
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -405,6 +401,27 @@ if (isset($_SESSION['nama'])) {
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#contactForm').on('submit', function(event) {
+            event.preventDefault(); // Mencegah form agar tidak submit secara default
+            
+            $.ajax({
+                url: 'admin/src/html/tambah_kontak.php', // URL ke file PHP
+                type: 'POST',
+                data: $(this).serialize(), // Mengambil data dari form
+                success: function(response) {
+                    $('#responseMessage').html(response); // Tampilkan respon dari server di atas form
+                    $('#contactForm')[0].reset(); // Reset form setelah pengiriman
+                },
+                error: function() {
+                    $('#responseMessage').html('<p class="alert alert-danger">Terjadi kesalahan. Silakan coba lagi.</p>');
+                }
+            });
+        });
+    });
+</script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

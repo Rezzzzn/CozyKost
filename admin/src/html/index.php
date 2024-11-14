@@ -17,94 +17,9 @@ include("../../../php/koneksi.php");
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
-    <!-- Sidebar Start -->
-    <aside class="left-sidebar">
-      <!-- Sidebar scroll-->
-      <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.html" class="text-nowrap logo-img">
-            <img src="../assets/images/logos/logo cozykost1.png" alt="" width="200px" />
-          </a>
-          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-            <i class="ti ti-x fs-8"></i>
-          </div>
-        </div>
-        <!-- Sidebar navigation-->
-        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-          <ul id="sidebarnav">
-            <!-- Sidebar Header -->
-            <li class="nav-small-cap">
-              <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
-              <span class="hide-menu">Home</span>
-            </li>
-
-            <!-- Dashboard Section -->
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.php" aria-expanded="false">
-                <iconify-icon icon="solar:widget-add-line-duotone"></iconify-icon>
-                <span class="hide-menu">Dashboard</span>
-              </a>
-            </li>
-
-            <li>
-              <span class="sidebar-divider lg"></span>
-            </li>
-
-            <!-- New Section Title with Icon -->
-            <li class="nav-small-cap">
-              <iconify-icon icon="solar:widget-add-line-duotone" class="nav-small-cap-icon fs-4"></iconify-icon>
-              <span class="hide-menu">Kost</span>
-            </li>
-
-            <!-- Kamar Section -->
-            <?php if ($_SESSION['level'] == 1) { ?>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="kost.php" aria-expanded="false">
-                <iconify-icon icon="mdi:home-outline"></iconify-icon>
-                <span class="hide-menu">Kost</span>
-              </a>
-            </li>
-            <?php } ?>
-
-            <!-- Kamar Section -->
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="read_kamar.php" aria-expanded="false">
-                <iconify-icon icon="material-symbols:bed"></iconify-icon>
-                <span class="hide-menu">Kamar</span>
-              </a>
-            </li>
-
-            
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="booking.php" aria-expanded="false">
-                <iconify-icon icon="uil:calender"></iconify-icon>
-                <span class="hide-menu">Booking</span>
-              </a>
-            </li>
-            
-            <?php if ($_SESSION['level'] == 1) { ?>
-            <li class="nav-small-cap">
-              <iconify-icon icon="solar:widget-add-line-duotone" class="nav-small-cap-icon fs-4"></iconify-icon>
-              <span class="hide-menu">User</span>
-            </li>
-
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="manage_user.php" aria-expanded="false">
-                  <iconify-icon icon="mdi:user"></iconify-icon>
-                  <span class="hide-menu">User</span>
-                </a>
-              </li>
-            <?php } ?>
-
-          </ul>
-        </nav>
-
-
-        <!-- End Sidebar navigation -->
-      </div>
-      <!-- End Sidebar scroll-->
-    </aside>
-    <!--  Sidebar End -->
+        <!-- Sidebar Start -->
+        <?php include 'sidebar.php'; ?>
+        <!--  Sidebar End -->
     <!--  Main wrapper -->
     <div class="body-wrapper">
       <!--  Header Start -->
@@ -163,7 +78,7 @@ include("../../../php/koneksi.php");
             <!-- Row for Cards -->
             <div class="row">
               <!-- Card 1 -->
-              <div class="col-lg-3 col-md-6 mb-4">
+              <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card bg-danger-subtle shadow-none w-100">
                   <div class="card-body">
                     <div class="d-flex mb-10 pb-1 justify-content-between align-items-center">
@@ -198,7 +113,7 @@ include("../../../php/koneksi.php");
               </div>
 
               <!-- Card 2 -->
-              <div class="col-lg-3 col-md-6 mb-4">
+              <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card bg-secondary-subtle shadow-none w-100">
                   <div class="card-body">
                     <div class="d-flex mb-10 pb-1 justify-content-between align-items-center">
@@ -233,7 +148,7 @@ include("../../../php/koneksi.php");
               </div>
 
               <!-- Card 3 -->
-              <div class="col-lg-3 col-md-6 mb-4">
+              <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card bg-info-subtle shadow-none w-100">
                   <div class="card-body">
                     <div class="d-flex mb-10 pb-1 justify-content-between align-items-center">
@@ -261,41 +176,6 @@ include("../../../php/koneksi.php");
                       </div>
                       <div class="col-6">
                         <div id="total-users-chart" style="height: 100px;"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 4 -->
-              <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card bg-success-subtle shadow-none w-100">
-                  <div class="card-body">
-                    <div class="d-flex mb-10 pb-1 justify-content-between align-items-center">
-                      <div class="d-flex align-items-center gap-6">
-                        <div class="rounded-circle-shape bg-success px-3 py-2 rounded-pill d-inline-flex align-items-center justify-content-center">
-                          <iconify-icon icon="ic:baseline-attach-money" class="fs-7 text-white"></iconify-icon>
-                        </div>
-                        <h6 class="mb-0 fs-4 fw-medium text-muted">Pendapatan</h6>
-                      </div>
-                      <div class="dropdown dropstart">
-                        <a href="javascript:void(0)" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="ti ti-dots-vertical fs-6"></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <li><a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)"><i class="fs-4 ti ti-plus"></i>Add</a></li>
-                          <li><a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)"><i class="fs-4 ti ti-edit"></i>Edit</a></li>
-                          <li><a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)"><i class="fs-4 ti ti-trash"></i>Delete</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="row align-items-center">
-                      <div class="col-6">
-                        <h2 class="mb-6 fs-7">400</h2>
-                        <span class="badge rounded-pill border border-muted fw-bold text-muted fs-2 py-1">+25% bulan lalu</span>
-                      </div>
-                      <div class="col-6">
-                        <div id="total-income-chart" style="height: 100px;"></div>
                       </div>
                     </div>
                   </div>

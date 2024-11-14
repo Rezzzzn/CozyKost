@@ -1,0 +1,59 @@
+body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+.table td, .table th {
+    vertical-align: middle;
+    padding: 12px;
+    border: none;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+}
+.table-hover tbody tr:hover {
+    background-color: #e9ecef;
+}
+.table img {
+    border-radius: 8px;
+    width: 60px;
+    height: auto;
+}
+.btn-link {
+    color: #007bff;
+    font-weight: 500;
+    padding: 0;
+}
+.btn-link:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+.action-links a {
+    margin-right: 8px;
+}
+
+  .card .border-end {
+    border-color: #28a745 !important;
+  }
+
+  .btn-outline-success {
+    border-color: #28a745;
+    color: #28a745;
+  }
+
+  .btn-outline-success:hover {
+    background-color: #28a745;
+    color: #fff;
+  }
+
+  /* Tambahkan warna latar belakang pada diskon dan status */
+
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-img-top {
+    height: 200px; /* Sesuaikan tinggi ini sesuai kebutuhan */
+    object-fit: cover; /* Menjaga proporsi gambar */
+  }
+  

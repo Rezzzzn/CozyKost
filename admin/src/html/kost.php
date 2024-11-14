@@ -9,125 +9,31 @@ include("../../../php/koneksi.php");
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CozyKost</title>
-  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/logo cozykost1.png"  />
+  <title>CozyKost - Kelola Kost</title>
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/logo cozykost1.png" />
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
-  <link rel="stylesheet" href="../assets/css/kamar.css  ">
+  <link rel="stylesheet" href="../assets/css/kamar.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
-  <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
-    <!-- Sidebar Start -->
-    <aside class="left-sidebar">
-      <!-- Sidebar scroll-->
-      <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.html" class="text-nowrap logo-img">
-            <img src="../assets/images/logos/logo cozykost1.png" alt="" width="200px"/>
-          </a>
-          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-            <i class="ti ti-x fs-8"></i>
-          </div>
-        </div>
-        <!-- Sidebar navigation-->
-        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-            <ul id="sidebarnav">
-              <!-- Sidebar Header -->
-              <li class="nav-small-cap">
-                <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
-                <span class="hide-menu">Home</span>
-              </li>
-              
-              <!-- Dashboard Section -->
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="./index.php" aria-expanded="false">
-                  <iconify-icon icon="solar:widget-add-line-duotone"></iconify-icon>
-                  <span class="hide-menu">Dashboard</span>
-                </a>
-              </li>
-                  
-              <li>
-                <span class="sidebar-divider lg"></span>
-              </li>
-  
-              <!-- New Section Title with Icon -->
-              <?php if ($_SESSION['level'] == 1) { ?>
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="kost.php" aria-expanded="false">
-                  <iconify-icon icon="mdi:home-outline"></iconify-icon>
-                  <span class="hide-menu">Kost</span>
-                </a>
-              </li>
-              <?php } ?>
-              
-  
-              <!-- Kamar Section -->
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="kamar.php" aria-expanded="false">
-                  <iconify-icon icon="material-symbols:bed"></iconify-icon>
-                  <span class="hide-menu">Kamar</span>
-                </a>
-              </li>
 
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="booking.php" aria-expanded="false">
-                  <iconify-icon icon="uil:calender"></iconify-icon>
-                  <span class="hide-menu">Booking</span>
-                </a>
-              </li>
-  
-              <!-- <li class="nav-small-cap">
-                <iconify-icon icon="solar:widget-add-line-duotone" class="nav-small-cap-icon fs-4"></iconify-icon>
-                <span class="hide-menu">Pendapatan</span>
-              </li>
-  
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="kamar.html" aria-expanded="false">
-                  <iconify-icon icon="rivet-icons:money"></iconify-icon>
-                  <span class="hide-menu">Pendapatan</span>
-                </a>
-              </li> -->
-  
-              <?php if ($_SESSION['level'] == 1) { ?>
-            <li class="nav-small-cap">
-              <iconify-icon icon="solar:widget-add-line-duotone" class="nav-small-cap-icon fs-4"></iconify-icon>
-              <span class="hide-menu">User</span>
-            </li>
+    <?php include 'sidebar.php'; ?>
 
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="manage_user.php" aria-expanded="false">
-                  <iconify-icon icon="mdi:user"></iconify-icon>
-                  <span class="hide-menu">User</span>
-                </a>
-              </li>
-            <?php } ?>
-              
-  
-            </ul>
-          </nav>
-   
-        <!-- End Sidebar navigation -->
-      </div>
-      <!-- End Sidebar scroll-->
-    </aside>
-    <!--  Sidebar End -->
-    <!--  Main wrapper -->
     <div class="body-wrapper">
-      <!--  Header Start -->
       <header class="app-header">
         <nav class="navbar navbar-expand-lg navbar-light">
           <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
-              <a class="nav-link sidebartoggler " id="headerCollapse" href="javascript:void(0)">
+              <a class="nav-link sidebartoggler" id="headerCollapse" href="javascript:void(0)">
                 <i class="ti ti-menu-2"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="javascript:void(0)">
+              <a class="nav-link" href="javascript:void(0)">
                 <iconify-icon icon="solar:bell-linear" class="fs-6" style="color: #000000;"></iconify-icon>
                 <div class="notification bg-success rounded-circle"></div>
               </a>
@@ -161,190 +67,99 @@ include("../../../php/koneksi.php");
           </div>
         </nav>
       </header>
-      <!--  Header End -->
 
-  <!-- Main Content -->
-    <div class="container mt-5">
-    <h2 class="mb-4 text-left">Manage Kost</h2>
-    <div class="d-flex mb-3">
-      <div class="search-container">
-        <div class="search-bar" style="margin-left: 15px;">
-          <i class="fas fa-search"></i>
-          <input type="text" class="form-control" id="searchInput" placeholder="Search Kost">
+      <div class="container mt-5">
+        <h1>Kelola Kost</h1>
+        <p>Selamat datang, <?php echo isset($_SESSION['nama']) ? htmlspecialchars($_SESSION['nama']) : 'Pengguna'; ?>!</p>
+
+        <!-- Button Tambah Kost -->
+        <div class="d-flex justify-content-between my-2">
+          <input type="text" id="searchInput" class="form-control rounded-pill h-50 w-25" placeholder="Cari kamar...">
+          <a href="create_kost.php" class="btn btn-success mb-3 rounded">
+            <i class="fas fa-plus"></i> Tambah Kost
+          </a>
         </div>
-      </div>
-      <div class="btn-add-container" style="margin-right: 22px;">
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addEditModal">
-          <i class="fas fa-plus"></i> Add New Kost
-        </button>
-        <form method="POST" action="../php/create_kamar.php"></form>
-      </div>
-    </div>
-    <div class="table-wrapper">
-      <div class="table-responsive">
-        <table class="table table-striped table-hover" id="kamarTable">
+
+
+        <!-- Tabel untuk menampilkan data kost -->
+        <table class="table table-bordered" id="kostable">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Foto</th>
-              <th scope="col">Nama</th>
-              <th scope="col">Deskripsi</th>
-              <th scope="col">Alamat</th>
-              <th scope="col">Actions</th>
+              <th>No</th>
+              <th>Foto</th>
+              <th>Nama</th>
+              <th>Alamat</th>
+              <th>Deskripsi</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            <!-- Example Row -->
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../../../asset/image 6.png" alt="Kamar" class="img-thumbnail"></td>
-              <td>UdinKost</td>
-              <td>Kamar luas dengan fasilitas lengkap.</td>
-              <td>Jl. Merdeka No. 10</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td><img src="../../../asset/image 6.png" alt="Kamar" class="img-thumbnail"></td>
-              <td>UdinKost</td>
-              <td>Kamar luas dengan fasilitas lengkap.</td>
-              <td>Jl. Merdeka No. 10</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                  <a class="btn btn-primary btn-sm" href="#EditModal" data-bs-toggle="modal" data-bs-target="#EditModal">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <!-- More rows as needed -->
+            <?php
+            $query = "SELECT * FROM kost";
+            $result = $conn->query($query);
+            $no = 1;
+
+            if ($result && mysqli_num_rows($result) > 0) {
+              while ($row = mysqli_fetch_assoc($result)) {
+                $id = isset($row['id']) ? htmlspecialchars($row['id']) : 'Tidak ada ID';
+                // $foto = !empty($row['foto']) ? "../../../uploads/kos/" . htmlspecialchars($row['foto']) : "../../../uploads/kos/default.jpg";
+                $foto = !empty($row['foto']) ? htmlspecialchars($row['foto']) : "../../../upload1/";
+                $nama = htmlspecialchars($row['nama']);
+                $alamat = htmlspecialchars($row['alamat']);
+                $deskripsi = htmlspecialchars($row['deskripsi']);
+
+                echo "<tr>
+                <td>{$no}</td>
+                <td><img src='{$foto}' alt='Kamar Image' class='img-fluid' style='width: 100px; height: auto;'></td>
+                <td>{$nama}</td>
+                <td>{$alamat}</td>
+                <td>{$deskripsi}</td>
+                <td>
+                  <a href='read_kamar.php?id={$id}' class='btn btn-info btn-sm'><i class='fas fa-eye'></i> Detail</a>
+                  <a href='kelola_kost.php?id={$id}' class='btn btn-warning btn-sm'><i class='fas fa-edit'></i> Edit</a>
+                  <a href='hapus_kost.php?id={$id}' class='btn btn-danger btn-sm' onclick='return confirm(\"Apakah Anda yakin ingin menghapus kost ini?\");'><i class='fas fa-trash'></i> Hapus</a>
+                </td>
+              </tr>";
+                $no++;
+              }
+            } else {
+              echo "<tr><td colspan='6' class='text-center'>Tidak ada data kost</td></tr>";
+            }
+            ?>
           </tbody>
+
         </table>
       </div>
-    </div>
-  </div>
 
-  <!-- Modal for Add -->
-  <div class="modal fade" id="addEditModal" tabindex="-1" aria-labelledby="addEditModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addEditModalLabel">Add/Edit Kamar</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form action="../php/create_kamar.php" method="post" enctype="multipart/form-data">
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="foto" class="form-label">Foto</label>
-              <input type="file" class="form-control" id="foto" name="foto" accept="image/*" required>
-            </div>
-            <div class="mb-3">
-              <label for="nama" class="form-label">Nama</label>
-              <input type="text" class="form-control" id="nama" name="nama" required>
-            </div>
-            <div class="mb-3">
-              <label for="deskripsi" class="form-label">Deskripsi</label>
-              <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="alamat" class="form-label">Alamat</label>
-              <input type="text" class="form-control" id="alamat" name="alamat" required>
-            </div>
-            <div class="mb-3">
-              <label for="harga" class="form-label">Harga</label>
-              <input type="number" class="form-control" id="harga" name="harga" required>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!-- Modal for Edit -->
-  <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="EditModalLabel">Edit Kamar</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form action="../php/create_kamar.php" method="post" enctype="multipart/form-data">
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="foto" class="form-label">Foto</label>
-              <input type="file" class="form-control" id="foto" name="foto" accept="image/*" required>
-            </div>
-            <div class="mb-3">
-              <label for="nama" class="form-label">Nama</label>
-              <input type="text" class="form-control" id="nama" name="nama" required>
-            </div>
-            <div class="mb-3">
-              <label for="deskripsi" class="form-label">Deskripsi</label>
-              <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="alamat" class="form-label">Alamat</label>
-              <input type="text" class="form-control" id="alamat" name="alamat" required>
-            </div>
-            <div class="mb-3">
-              <label for="harga" class="form-label">Harga</label>
-              <input type="number" class="form-control" id="harga" name="harga" required>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+      <!-- Scripts -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+      <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+      <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="../assets/js/sidebarmenu.js"></script>
+      <script src="../assets/js/app.min.js"></script>
+      <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+      <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+      <script src="../assets/js/dashboard.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+      <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+          var searchValue = this.value.toLowerCase();
+          var tableRows = document.querySelectorAll('#kostable tbody tr');
 
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Search Functionality
-    document.getElementById('searchInput').addEventListener('input', function () {
-      const searchValue = this.value.toLowerCase();
-      const rows = document.querySelectorAll('#kamarTable tbody tr');
+          tableRows.forEach(function(row) {
+            var nama = row.cells[1].textContent.toLowerCase();
+            var alamat = row.cells[2].textContent.toLowerCase();
+            var deskripsi = row.cells[5].textContent.toLowerCase();
 
-      rows.forEach(row => {
-        const cells = row.getElementsByTagName('td');
-        let match = false;
-        for (let i = 1; i < cells.length - 1; i++) {
-          if (cells[i].innerText.toLowerCase().includes(searchValue)) {
-            match = true;
-            break;
-          }
-        }
-        row.style.display = match ? '' : 'none';
-      });
-    });
-  </script>
-  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/sidebarmenu.js"></script>
-  <script src="../assets/js/app.min.js"></script>
-  <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-  <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-  <script src="../assets/js/dashboard.js"></script>
-  <!-- solar icons -->
-  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+            // Jika pencarian cocok dengan salah satu kolom
+            if (nama.includes(searchValue) || alamat.includes(searchValue) || deskripsi.includes(searchValue)) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        });
+      </script>
 </body>
 
 </html>

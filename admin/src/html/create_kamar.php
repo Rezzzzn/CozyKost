@@ -1,4 +1,4 @@
-<?php include("../../../php/koneksi.php"); ?>
+<!-- <?php include("../../../php/koneksi.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,4 +49,4 @@
         <input type="submit" name="tambah" value="Tambah Kamar">
     </form>
 </body>
-</html>
+</html> -->

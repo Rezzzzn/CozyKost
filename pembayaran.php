@@ -1,6 +1,7 @@
 <?php
 // Memulai session
 session_start();
+include 'php/koneksi.php';
 
 // Cek apakah user sudah login
 if (isset($_SESSION['nama'])) {
@@ -8,13 +9,80 @@ if (isset($_SESSION['nama'])) {
 } else {
     // Jika user belum login, alihkan ke halaman login
     header("location:login.php");
+    exit;
 }
-?>
 
-<?php
-include 'get_booking.php'; // Ambil data booking dari database
-$tgl_masuk = $row['tgl_masuk'];
-$tgl_keluar = $row['tgl_keluar'];
+// Ambil ID booking dari session atau URL
+$id_booking = $_SESSION['id_booking'] ?? $_GET['id_booking'] ?? null;
+
+// Cek apakah ID booking ada
+if ($id_booking) {
+    // Ambil data booking berdasarkan ID
+    $query = "SELECT nama, email FROM booking WHERE id_booking = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $id_booking);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $booking = $result->fetch_assoc();
+
+    // Cek apakah data booking ditemukan
+    if ($booking) {
+        $nama = $booking['nama'];
+        $email = $booking['email'];
+    } else {
+        echo "Data booking tidak ditemukan.";
+        $nama = $email = ""; // Atur variabel ke nilai kosong jika tidak ada data
+    }
+
+    // Query untuk mengambil data kamar
+    $query = "SELECT b.id_booking, b.nama, b.email, b.no_telp, b.id_kamar, b.created_at, k.durasi, k.nama_kost, k.harga, k.fasilitas, k.gambar1, k.gambar2
+              FROM booking b
+              JOIN kamar k ON b.id_kamar = k.id
+              WHERE b.id_booking = ?";
+
+    // Prepare and execute the query
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $id_booking);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Cek apakah data kamar ditemukan
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $tgl_masuk = isset($row['created_at']) ? $row['created_at'] : null;
+        $durasi = isset($row['durasi']) ? $row['durasi'] : null; // Durasi kamar
+        $nama_kamar = isset($row['nama_kost']) ? $row['nama_kost'] : null;
+        $harga = isset($row['harga']) ? $row['harga'] : null;
+        $fasilitas = isset($row['fasilitas']) ? $row['fasilitas'] : null;
+        $gambar_1 = isset($row['gambar1']) ? $row['gambar1'] : null;
+        $gambar_2 = isset($row['gambar2']) ? $row['gambar2'] : null;
+
+        // Hitung tanggal keluar berdasarkan durasi (dalam bulan)
+        if ($tgl_masuk && $durasi) {
+            $datetime = new DateTime($tgl_masuk); // Membuat objek DateTime dari tanggal masuk
+            $datetime->add(new DateInterval('P' . $durasi . 'M')); // Menambahkan durasi dalam bulan (M = bulan)
+            $tgl_keluar = $datetime->format('Y-m-d'); // Mendapatkan tanggal keluar
+        } else {
+            $tgl_keluar = null;
+        }
+    } else {
+        echo "Pesanan tidak ditemukan.";
+        $tgl_masuk = $tgl_keluar = $nama_kamar = $harga = $fasilitas = $gambar_1 = $gambar_2 = "";
+    }
+} else {
+    echo "ID booking tidak ditemukan.";
+    $nama = $email = $tgl_masuk = $tgl_keluar = $nama_kamar = $harga = $fasilitas = $gambar_1 = $gambar_2 = "";
+}
+
+// Mendefinisikan harga sebelum diskon
+$harga_awal = $harga; // Harga yang diambil dari database
+
+// Tentukan persentase diskon
+$diskon_persen = 10; // Misalnya diskon 10%
+
+// Menghitung diskon
+$diskon = ($harga_awal * $diskon_persen) / 100;
+$harga_setelah_diskon = $harga_awal - $diskon;
 ?>
 
 <!DOCTYPE html>
@@ -52,11 +120,27 @@ $tgl_keluar = $row['tgl_keluar'];
     <link href="css/pembayaran.css" rel="stylesheet">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/pb.css">
-    
+
 
 </head>
 
 <body>
+    <style>
+        .pesanan {
+            display: flex;
+            flex-direction: column;
+            /* Menata elemen secara vertikal */
+            align-items: flex-start;
+            /* Menyusun elemen ke kiri (atau bisa menggunakan center) */
+            height: auto;
+            /* Membiarkan kontainer menyesuaikan dengan kontennya */
+        }
+
+        .pesanan .mb-1 {
+            margin-bottom: 10px;
+            /* Menambahkan jarak antara elemen-elemen */
+        }
+    </style>
 
 
     <div class="modal fade modal-profile" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
@@ -135,8 +219,8 @@ $tgl_keluar = $row['tgl_keluar'];
         <!-- Data Penghuni -->
         <div class="data-penghuni">
             <h5>Data Penghuni</h5>
-            <p class="mb-1"><strong>Purwono</strong></p>
-            <p class="mb-1">purwonoadi@gmail.com</p>
+            <p class="mb-1"><?php echo htmlspecialchars($nama); ?></p>
+            <p class="mb-1"><?php echo htmlspecialchars($email); ?></p>
             <p class="text-muted">Kartu identitas asli (KTP/KITAS) dan Surat Nikah (untuk pasangan) dibutuhkan saat check-in</p>
 
             <!-- Tombol Pilih Pembayaran -->
@@ -152,18 +236,17 @@ $tgl_keluar = $row['tgl_keluar'];
         <div class="pesanan">
             <div class="p-3 bg-light rounded">
                 <h6>Pesanan</h6>
+                <!-- Tampilkan Tanggal Masuk dan Tanggal Keluar -->
                 <p class="mb-1"><?php echo date('j F Y', strtotime($tgl_masuk)); ?> - <?php echo date('j F Y', strtotime($tgl_keluar)); ?></p>
                 <hr>
                 <div class="mb-2 text-start">
-                    <img src="asset/image 2.png" alt="Kamar" class="img-fluid kamar">
-                    <img src="asset/image 3.png" alt="Kamar" class="img-fluid kamar">
-
+                    <img src="uploads/<?php echo htmlspecialchars($gambar_1); ?>" alt="Kamar 1" class="img-fluid kamar">
+                    <img src="uploads/<?php echo htmlspecialchars($gambar_2); ?>" alt="Kamar 2" class="img-fluid kamar">
                 </div>
                 <p class="mb-1 mt-2">Kamar kamu</p>
-                <p class="mb-1"><strong>Farros Stay House</strong></p>
-                <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#facilitiesModal">Lihat Fasilitas</a>
-                <hr>
-                <p><strong>Rp.1.500.000 / Bulan</strong></p>
+                <p class="mb-1"><strong><?php echo htmlspecialchars($nama_kamar); ?></strong></p>
+                <p class="mb-1">Fasilitas: <?php echo htmlspecialchars($fasilitas); ?></p>
+                <p class="mb-1">Harga: Rp<?php echo number_format($harga, 0, ',', '.'); ?></p>
             </div>
         </div>
     </div>
@@ -173,18 +256,23 @@ $tgl_keluar = $row['tgl_keluar'];
         <h5>Rincian Pembayaran</h5>
         <div class="d-flex justify-content-between">
             <p>Kost</p>
-            <p>Rp.1.500.000</p>
+            <h4> Rp<?php echo number_format($harga_awal, 0, ',', '.'); ?></h4>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p>Diskon (<?php echo $diskon_persen; ?>%)</p>
+            <h5>Rp<?php echo number_format($diskon, 0, ',', '.'); ?></h5>
         </div>
         <hr>
         <div class="d-flex justify-content-between">
-            <p><strong>Total</strong></p>
-            <p><strong>Rp.1.500.000</strong></p>
+            <h4><strong>Total</strong></h4>
+            <h4><strong>Rp<?php echo number_format($harga_setelah_diskon, 0, ',', '.'); ?></strong></h4>
         </div>
         <div class="d-flex justify-content-end mt-4">
             <button class="btn btn-success me-2" style="border-radius: 7px;">Konfirmasi Pesanan</button>
             <a href="landing_page.php" class="btn btn-secondary" style="border-radius: 7px;">Kembali Ke Dashboard</a>
         </div>
     </div>
+
 
     <!-- Modal untuk Pilihan Pembayaran -->
     <div class="modal fade modal-dialog-scrollable" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
@@ -249,70 +337,70 @@ $tgl_keluar = $row['tgl_keluar'];
             </div>
         </div>
     </div>
-    
+
 
     <!-- Modal untuk Fasilitas -->
     <div class="modal fade modal-dialog-scrollable" id="facilitiesModal" tabindex="-1" aria-labelledby="facilitiesModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="facilitiesModalLabel">Fasilitas</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <ul class="list-unstyled">
-                    <!-- Fasilitas 1: Kamar Mandi Dalam -->
-                    <li class="fasilitas d-flex flex-wrap align-items-center">
-                        <a class="text-dark" data-bs-toggle="collapse" href="#collapseBathroom" role="button" aria-expanded="false" aria-controls="collapseBathroom">
-                            <i class="fa-solid fa-bath me-2"></i> Kamar Mandi Dalam
-                        </a>
-                        <div class="collapse" id="collapseBathroom">
-                            <div class="d-flex justify-content-center mt-2">
-                                <img src="asset/jedhing2.png" class="fasilitas-img" alt="Kamar Mandi Dalam" style="width:400px; border-radius:3px;">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="facilitiesModalLabel">Fasilitas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-unstyled">
+                        <!-- Fasilitas 1: Kamar Mandi Dalam -->
+                        <li class="fasilitas d-flex flex-wrap align-items-center">
+                            <a class="text-dark" data-bs-toggle="collapse" href="#collapseBathroom" role="button" aria-expanded="false" aria-controls="collapseBathroom">
+                                <i class="fa-solid fa-bath me-2"></i> Kamar Mandi Dalam
+                            </a>
+                            <div class="collapse" id="collapseBathroom">
+                                <div class="d-flex justify-content-center mt-2">
+                                    <img src="asset/jedhing2.png" class="fasilitas-img" alt="Kamar Mandi Dalam" style="width:400px; border-radius:3px;">
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <!-- Fasilitas 2: Parkiran -->
-                    <li class="fasilitas d-flex flex-wrap align-items-center">
-                        <a class="text-dark" data-bs-toggle="collapse" href="#collapseParking" role="button" aria-expanded="false" aria-controls="collapseParking">
-                            <i class="fa-solid fa-car me-2"></i> Parkiran 
-                        </a>
-                        <div class="collapse" id="collapseParking">
-                            <div class="d-flex justify-content-center mt-2">
-                                <img src="asset/parkiran2.jpg" class="fasilitas-img" alt="Parkiran" style="width:400px; border-radius:3px;">
+                        </li>
+                        <!-- Fasilitas 2: Parkiran -->
+                        <li class="fasilitas d-flex flex-wrap align-items-center">
+                            <a class="text-dark" data-bs-toggle="collapse" href="#collapseParking" role="button" aria-expanded="false" aria-controls="collapseParking">
+                                <i class="fa-solid fa-car me-2"></i> Parkiran
+                            </a>
+                            <div class="collapse" id="collapseParking">
+                                <div class="d-flex justify-content-center mt-2">
+                                    <img src="asset/parkiran2.jpg" class="fasilitas-img" alt="Parkiran" style="width:400px; border-radius:3px;">
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <!-- Fasilitas 3: WiFi -->
-                    <li class="fasilitas d-flex flex-wrap align-items-center">
-                        <a class="text-dark" data-bs-toggle="collapse" href="#collapseWifi" role="button" aria-expanded="false" aria-controls="collapseWifi">
-                            <i class="fa-solid fa-wifi me-2"></i> WiFi
-                        </a>
-                        <div class="collapse" id="collapseWifi">
-                            <div class="d-flex justify-content-center mt-2">
-                                <img src="asset/wifi2.jpg" class="fasilitas-img" alt="WiFi" style="width:400px; border-radius:3px;">
+                        </li>
+                        <!-- Fasilitas 3: WiFi -->
+                        <li class="fasilitas d-flex flex-wrap align-items-center">
+                            <a class="text-dark" data-bs-toggle="collapse" href="#collapseWifi" role="button" aria-expanded="false" aria-controls="collapseWifi">
+                                <i class="fa-solid fa-wifi me-2"></i> WiFi
+                            </a>
+                            <div class="collapse" id="collapseWifi">
+                                <div class="d-flex justify-content-center mt-2">
+                                    <img src="asset/wifi2.jpg" class="fasilitas-img" alt="WiFi" style="width:400px; border-radius:3px;">
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <!-- Fasilitas 4: Dapur -->
-                    <li class="fasilitas d-flex flex-wrap align-items-center">
-                        <a class="text-dark" data-bs-toggle="collapse" href="#collapseKitchen" role="button" aria-expanded="false" aria-controls="collapseKitchen">
-                            <i class="fa-solid fa-utensils me-2"></i> Dapur
-                        </a>
-                        <div class="collapse" id="collapseKitchen">
-                            <div class="d-flex justify-content-center mt-2">
-                                <img src="asset/pawon2.jpg" class="fasilitas-img" alt="Dapur" style="width:400px; border-radius:3px;">
+                        </li>
+                        <!-- Fasilitas 4: Dapur -->
+                        <li class="fasilitas d-flex flex-wrap align-items-center">
+                            <a class="text-dark" data-bs-toggle="collapse" href="#collapseKitchen" role="button" aria-expanded="false" aria-controls="collapseKitchen">
+                                <i class="fa-solid fa-utensils me-2"></i> Dapur
+                            </a>
+                            <div class="collapse" id="collapseKitchen">
+                                <div class="d-flex justify-content-center mt-2">
+                                    <img src="asset/pawon2.jpg" class="fasilitas-img" alt="Dapur" style="width:400px; border-radius:3px;">
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -325,7 +413,7 @@ $tgl_keluar = $row['tgl_keluar'];
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
-    <!-- <script>
+    <script>
         function showPaymentModal() {
             var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'), {
                 keyboard: false
@@ -367,7 +455,7 @@ $tgl_keluar = $row['tgl_keluar'];
                 collapseLink.setAttribute('aria-expanded', 'true');
             }
         });
-    </script> -->
+    </script>
 
 
 
@@ -382,7 +470,7 @@ $tgl_keluar = $row['tgl_keluar'];
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 
 
     <!-- CSS Bootstrap -->

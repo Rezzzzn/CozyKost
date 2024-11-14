@@ -104,14 +104,13 @@ body {
   width: 20px;
 }
 .form-content .input-boxes {
-  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .form-content .input-box {
   display: flex;
   align-items: center;
   height: 50px;
   width: 100%;
-  margin: 10px 0;
   position: relative;
 }
 .input-box input {

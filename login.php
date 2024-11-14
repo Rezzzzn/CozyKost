@@ -9,7 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
+
 <body>
     <div class="container">
         <input type="checkbox" id="flip">
@@ -49,7 +51,6 @@
                             <div class="button input-box">
                                 <input type="submit" name="Masuk" value="Masuk">
                             </div>
-
                             <!-- Registrasi -->
                             <div class="text sign-up-text">Belum punya akun? <label for="flip">Daftar</label></div>
                         </div>
@@ -67,6 +68,7 @@
                                 <i class="fas fa-envelope"></i>
                                 <input type="text" placeholder="Masukan email anda" name="email" required>
                             </div>
+                            <div class="error-message text-danger"></div>
                             <div class="input-box">
                                 <i class="fas fa-lock"></i>
                                 <input type="password" placeholder="Masukan sandi anda" name="password" required>
@@ -81,5 +83,29 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); // Validasi sederhana dengan regex
+        }
+
+        function validateForm(event) {
+            const emailInput = event.target.querySelector('input[name="email"]');
+            const errorMessage = event.target.querySelector('.error-message');
+
+            if (!validateEmail(emailInput.value)) {
+                errorMessage.textContent = "Email harus mengandung '@'.";
+                errorMessage.style.display = "block"; // Tampilkan pesan
+                event.preventDefault(); // Cegah pengiriman form
+            } else {
+                errorMessage.style.display = "none"; // Sembunyikan pesan
+            }
+        }
+
+        // Tambahkan event listener ke form
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', validateForm);
+        });
+    </script>
 </body>
 </html>
