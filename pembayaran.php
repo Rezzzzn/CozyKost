@@ -1,13 +1,13 @@
 <?php
 // Memulai session
 session_start();
+
 include 'php/koneksi.php';
 
 // Cek apakah user sudah login
 if (isset($_SESSION['nama'])) {
     $username = $_SESSION['nama'];
 } else {
-    // Jika user belum login, alihkan ke halaman login
     header("location:login.php");
     exit;
 }
@@ -17,21 +17,20 @@ $id_booking = $_SESSION['id_booking'] ?? $_GET['id_booking'] ?? null;
 
 // Cek apakah ID booking ada
 if ($id_booking) {
-    // Ambil data booking berdasarkan ID
-    $query = "SELECT nama, email FROM booking WHERE id_booking = ?";
+    $query = "SELECT nama, email, status_pembayaran FROM booking WHERE id_booking = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $id_booking);
     $stmt->execute();
     $result = $stmt->get_result();
     $booking = $result->fetch_assoc();
 
-    // Cek apakah data booking ditemukan
     if ($booking) {
         $nama = $booking['nama'];
         $email = $booking['email'];
+        $status_pembayaran = $booking['status_pembayaran']; // Ambil status pembayaran
     } else {
         echo "Data booking tidak ditemukan.";
-        $nama = $email = ""; // Atur variabel ke nilai kosong jika tidak ada data
+        $nama = $email = $status_pembayaran = "";
     }
 
     // Query untuk mengambil data kamar
@@ -40,28 +39,26 @@ if ($id_booking) {
               JOIN kamar k ON b.id_kamar = k.id
               WHERE b.id_booking = ?";
 
-    // Prepare and execute the query
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $id_booking);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Cek apakah data kamar ditemukan
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $tgl_masuk = isset($row['created_at']) ? $row['created_at'] : null;
-        $durasi = isset($row['durasi']) ? $row['durasi'] : null; // Durasi kamar
-        $nama_kamar = isset($row['nama_kost']) ? $row['nama_kost'] : null;
-        $harga = isset($row['harga']) ? $row['harga'] : null;
-        $fasilitas = isset($row['fasilitas']) ? $row['fasilitas'] : null;
-        $gambar_1 = isset($row['gambar1']) ? $row['gambar1'] : null;
-        $gambar_2 = isset($row['gambar2']) ? $row['gambar2'] : null;
+        $tgl_masuk = $row['created_at'];
+        $durasi = $row['durasi'];
+        $nama_kamar = $row['nama_kost'];
+        $harga = $row['harga'];
+        $fasilitas = $row['fasilitas'];
+        $gambar_1 = $row['gambar1'];
+        $gambar_2 = $row['gambar2'];
 
         // Hitung tanggal keluar berdasarkan durasi (dalam bulan)
         if ($tgl_masuk && $durasi) {
-            $datetime = new DateTime($tgl_masuk); // Membuat objek DateTime dari tanggal masuk
-            $datetime->add(new DateInterval('P' . $durasi . 'M')); // Menambahkan durasi dalam bulan (M = bulan)
-            $tgl_keluar = $datetime->format('Y-m-d'); // Mendapatkan tanggal keluar
+            $datetime = new DateTime($tgl_masuk);
+            $datetime->add(new DateInterval('P' . $durasi . 'M'));
+            $tgl_keluar = $datetime->format('Y-m-d');
         } else {
             $tgl_keluar = null;
         }
@@ -74,15 +71,41 @@ if ($id_booking) {
     $nama = $email = $tgl_masuk = $tgl_keluar = $nama_kamar = $harga = $fasilitas = $gambar_1 = $gambar_2 = "";
 }
 
-// Mendefinisikan harga sebelum diskon
-$harga_awal = $harga; // Harga yang diambil dari database
+// Mendefinisikan harga awal
+$harga_awal = $harga;
 
-// Tentukan persentase diskon
-$diskon_persen = 10; // Misalnya diskon 10%
+// Tentukan persentase diskon berdasarkan durasi
+if ($durasi == 12) {
+    $diskon_persen = 20; // 20% untuk durasi 12 bulan
+} else if ($durasi == 6) {
+    $diskon_persen = 10; // 10% untuk durasi 6 bulan
+} else {
+    $diskon_persen = 0; // Tanpa diskon jika durasi kurang dari 6 bulan
+}
 
-// Menghitung diskon
+// Hitung jumlah diskon dan harga setelah diskon
 $diskon = ($harga_awal * $diskon_persen) / 100;
 $harga_setelah_diskon = $harga_awal - $diskon;
+
+// Jika status pembayaran belum ada (Belum Dibayar), tambahkan opsi pembayaran
+if ($status_pembayaran == 'Belum Dibayar') {
+    // Simulasi pembayaran berhasil (untuk demonstrasi)
+    // Anda dapat mengganti bagian ini dengan metode pembayaran yang sesungguhnya (misalnya, menggunakan gateway pembayaran)
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['payment_method'])) {
+        $status_pembayaran = 'Dibayar'; // Pembayaran sukses
+        $payment_method = $_POST['payment_method']; // Metode pembayaran yang dipilih
+
+        // Update status pembayaran di database
+        $update_query = "UPDATE booking SET status_pembayaran = ?, metode_pembayaran = ? WHERE id_booking = ?";
+        $stmt = $conn->prepare($update_query);
+        $stmt->bind_param("ssi", $status_pembayaran, $payment_method, $id_booking);
+        $stmt->execute();
+
+        // Redirect ke halaman sukses pembayaran
+        header("Location: pembayaran_sukses.php?status=success");
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -265,12 +288,13 @@ $harga_setelah_diskon = $harga_awal - $diskon;
         <hr>
         <div class="d-flex justify-content-between">
             <h4><strong>Total</strong></h4>
-            <h4><strong>Rp<?php echo number_format($harga_setelah_diskon, 0, ',', '.'); ?></strong></h4>
+            <h4><strong>Rp <span id="hargaKamar"><?php echo number_format($harga_setelah_diskon, 0, ',', '.'); ?></span></strong></h4>
         </div>
         <div class="d-flex justify-content-end mt-4">
-            <button class="btn btn-success me-2" style="border-radius: 7px;">Konfirmasi Pesanan</button>
+            <button class="btn btn-success me-2" style="border-radius: 7px;" onclick="openPaymentModal()">Konfirmasi Pesanan</button>
             <a href="landing_page.php" class="btn btn-secondary" style="border-radius: 7px;">Kembali Ke Dashboard</a>
         </div>
+
     </div>
 
 
@@ -290,7 +314,7 @@ $harga_setelah_diskon = $harga_awal - $diskon;
                                 <i class="fa-solid fa-mobile-screen-button"></i> E-Wallet
                             </label>
                         </div>
-                        <div class="sub-options" id="ewalletOptions">
+                        <div class="sub-options" id="ewalletOptions" style="display:none;">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="ewalletOptions" id="ovo" value="OVO">
                                 <label class="form-check-label" for="ovo">
@@ -307,12 +331,6 @@ $harga_setelah_diskon = $harga_awal - $diskon;
                                 <input class="form-check-input" type="radio" name="ewalletOptions" id="dana" value="DANA">
                                 <label class="form-check-label" for="dana">
                                     <img src="asset/dana-removebg-preview.png" alt="DANA" class="payment-icon">
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="ewalletOptions" id="gofood" value="GoFood">
-                                <label class="form-check-label" for="gofood">
-                                    <img src="asset/download-removebg-preview (1).png" alt="GoFood" class="payment-icon">
                                 </label>
                             </div>
                         </div>
@@ -332,11 +350,14 @@ $harga_setelah_diskon = $harga_awal - $diskon;
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="savePaymentMethod()">Simpan Pilihan</button>
+                    <button type="button" class="btn btn-success" onclick="savePaymentMethod()">Simpan Pilihan</button>
                 </div>
             </div>
         </div>
     </div>
+
+
+
 
 
     <!-- Modal untuk Fasilitas -->
@@ -414,48 +435,118 @@ $harga_setelah_diskon = $harga_awal - $diskon;
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
     <script>
+        let selectedPaymentMethod = null;
+        let selectedEwalletOption = null;
+
+        // Mengambil harga dari elemen HTML
+        let hargaText = document.getElementById('hargaKamar').textContent;
+        let harga = hargaText.replace('Rp', '').replace('.', '').trim(); // Menghapus 'Rp' dan titik, serta mengonversi ke angka
+        harga = parseInt(harga) * 1000;
+
+        // Mendapatkan id_booking dari PHP
+        let idBooking = <?php echo json_encode($id_booking); ?>;
+
         function showPaymentModal() {
-            var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'), {
+            const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'), {
                 keyboard: false
             });
             paymentModal.show();
         }
 
-        function savePaymentMethod() {
-            var selectedOption = document.querySelector('input[name="paymentOptions"]:checked').value;
-            document.getElementById('selectedPayment').textContent = selectedOption;
-        }
-
-
         function toggleSubOptions(show) {
-            var subOptions = document.getElementById('ewalletOptions');
-            if (show) {
-                subOptions.style.display = 'block'; // Tampilkan dropdown
-            } else {
-                subOptions.style.display = 'none'; // Sembunyikan dropdown
-            }
+            document.getElementById("ewalletOptions").style.display = show ? "block" : "none";
         }
 
         // Menyembunyikan sub-pilihan jika metode lain dipilih
         document.querySelectorAll('input[name="paymentOptions"]').forEach(function(radio) {
             radio.addEventListener('change', function() {
-                if (this.id !== 'ewallet') {
-                    toggleSubOptions(false);
-                }
+                toggleSubOptions(this.id === 'ewallet');
             });
         });
 
-        var collapseLink = document.querySelector('.fasilitas a');
-        var collapseElement = document.querySelector('#collapseBathroom');
+        function savePaymentMethod() {
+            // Menyimpan pilihan metode pembayaran utama
+            const paymentOptions = document.getElementsByName('paymentOptions');
+            for (let option of paymentOptions) {
+                if (option.checked) {
+                    selectedPaymentMethod = option.value;
+                    break;
+                }
+            }
+
+            // Jika metode adalah E-Wallet, simpan sub-pilihannya
+            if (selectedPaymentMethod === "E-Wallet") {
+                const ewalletOptions = document.getElementsByName('ewalletOptions');
+                for (let option of ewalletOptions) {
+                    if (option.checked) {
+                        selectedEwalletOption = option.value;
+                        break;
+                    }
+                }
+            }
+
+            // Menampilkan metode pembayaran yang dipilih
+            document.getElementById('selectedPayment').textContent = selectedPaymentMethod;
+
+            // Tutup modal dan hapus backdrop
+            const paymentModal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+            paymentModal.hide();
+        }
+
+        function openPaymentModal() {
+            // Kirim data pembayaran ke process_payment.php dan ambil snap token dari Midtrans
+            fetch('payment_process.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        paymentMethod: selectedPaymentMethod,
+                        ewalletOption: selectedEwalletOption,
+                        harga: harga,
+                        id_booking: idBooking // Mengirim id_booking
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.token) {
+                        // Panggil Midtrans Snap untuk melakukan pembayaran
+                        window.snap.pay(data.token, {
+                            onSuccess: function(result) {
+                                alert("Pembayaran berhasil!");
+                                window.location.href = "success_page.php"; // Arahkan ke halaman sukses setelah pembayaran berhasil
+                            },
+                            onPending: function(result) {
+                                alert("Menunggu pembayaran...");
+                            },
+                            onError: function(result) {
+                                alert("Pembayaran gagal!");
+                            },
+                            onClose: function() {
+                                alert("Anda menutup popup pembayaran.");
+                            }
+                        });
+                    } else {
+                        alert("Gagal mendapatkan token pembayaran: " + data.error);
+                    }
+                })
+                .catch(error => {
+                    alert("Terjadi kesalahan: " + error);
+                });
+        }
+
+
+        // Menambahkan event listener untuk link collapse
+        const collapseLink = document.querySelector('.fasilitas a');
+        const collapseElement = document.querySelector('#collapseBathroom');
 
         collapseLink.addEventListener('click', function() {
-            if (collapseElement.classList.contains('show')) {
-                collapseLink.setAttribute('aria-expanded', 'false');
-            } else {
-                collapseLink.setAttribute('aria-expanded', 'true');
-            }
+            collapseLink.setAttribute('aria-expanded', !collapseElement.classList.contains('show'));
         });
     </script>
+
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-zk0KqiwrCAgqgUlo"></script>
+
 
 
 
