@@ -221,7 +221,7 @@ if ($status_pembayaran == 'Belum Dibayar') {
                 <div class="navbar-nav ms-auto py-0">
                     <a href="landing_page.php" class="nav-item nav-link active">Beranda</a>
                     <a href="#tentang-kami" class="nav-item nav-link">Tentang Kami</a>
-                    <a href="#service" class="nav-item nav-link">Rooms</a>
+                    <a href="#service" class="nav-item nav-link">Kamar</a>
                     <a href="#paket" class="nav-item nav-link">Paket</a>
                     <a href="#paket" class="nav-item nav-link">Pesanan</a>
                     <a href="contact.html" class="nav-item nav-link">Kontak</a>
@@ -514,7 +514,7 @@ if ($status_pembayaran == 'Belum Dibayar') {
                         window.snap.pay(data.token, {
                             onSuccess: function(result) {
                                 alert("Pembayaran berhasil!");
-                                window.location.href = "success_page.php"; // Arahkan ke halaman sukses setelah pembayaran berhasil
+                                window.location.href = "pembayaran_sukses.php"; // Arahkan ke halaman sukses setelah pembayaran berhasil
                             },
                             onPending: function(result) {
                                 alert("Menunggu pembayaran...");

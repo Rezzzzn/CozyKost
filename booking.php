@@ -17,10 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("sssi", $nama, $email, $no_telp, $id_kamar);
 
         if ($stmt->execute()) {
-            // Ambil ID booking terakhir yang berhasil disimpan
             $id_booking = $conn->insert_id;
 
-            // Simpan ID booking dan data lainnya ke session
             $_SESSION['booking_data'] = [
                 'id_booking' => $id_booking,
                 'nama' => $nama,
@@ -29,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'id_kamar' => $id_kamar
             ];
 
-            // Lanjutkan ke halaman pembayaran
             header("Location: pembayaran.php?id_booking=" . $id_booking);
             exit();
         } else {
@@ -55,37 +52,47 @@ if (!$result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Kamar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/createkamar.css">
+
 </head>
 <body>
-    <h2>Form Booking Kamar</h2>
-    <form action="" method="POST">
-        <label for="nama">Nama:</label>
-        <input type="text" name="nama" required><br>
+    
+    <div class="container">
+        <h3>Form Booking Kamar</h3>
+        <form action="" method="POST">
+            <div class="form-grid">
+                <div class="field full-width">
+                    <label for="nama">Nama</label>
+                    <input type="text" name="nama" id="nama" placeholder="Masukkan nama Anda" required>
+                </div>
+                <div class="field full-width">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Masukkan email Anda" required>
+                </div>
+                <div class="field full-width">
+                    <label for="no_telp">No. Telepon</label>
+                    <input type="text" name="no_telp" id="no_telp" placeholder="Masukkan no. telepon Anda" required>
+                </div>
+                <div class="field full-width">
+                    <label for="id_kamar">Pilih Kamar</label>
+                    <select name="id_kamar" id="id_kamar" required>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <option value="<?= $row['id'] ?>"><?= $row['nama_kost'] ?> - Rp<?= number_format($row['harga'], 0, ',', '.') ?></option>
+                        <?php endwhile; ?>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">Booking Sekarang</button>
+        </form>
+    </div>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" required><br>
-
-        <label for="no_telp">No. Telepon:</label>
-        <input type="text" name="no_telp" required><br>
-
-        <label for="id_kamar">Pilih Kamar:</label>
-        <select name="id_kamar" required>
-            <?php while ($row = $result->fetch_assoc()): ?>
-                <option value="<?= $row['id'] ?>"><?= $row['nama_kost'] ?> - Rp<?= number_format($row['harga'], 0, ',', '.') ?></option>
-            <?php endwhile; ?>
-        </select><br>
-
-        <!-- Input hidden untuk menyimpan id_booking (jika ada) -->
-        <?php if (isset($id_booking)): ?>
-            <input type="hidden" name="id_booking" value="<?= $id_booking ?>">
-        <?php endif; ?>
-
-        <button type="submit">Booking Sekarang</button>
-    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
 <?php
-// Tutup koneksi setelah selesai
+// Tutup koneksi
 $conn->close();
 ?>

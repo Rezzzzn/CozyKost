@@ -48,90 +48,9 @@ $result = $conn->query($query);
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/modal.css">
-    <link rel="stylesheet" href="css/booking.css">
-
 </head>
 
 <body>
-    <style>
-        .package-item .img-fluid {
-            width: 100%;
-            /* Mengisi lebar penuh */
-            height: 250px;
-            /* Atur tinggi sesuai keinginan */
-            object-fit: cover;
-            /* Memastikan gambar menyesuaikan area tanpa merusak proporsinya */
-        }
-    </style>
-
-
-    <div class="modal fade modal-profile" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true" style="width: 2100px;">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header d-flex justify-content-between align-items-center" style="width: 1000px;">
-                    <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- User logo and name -->
-                    <!-- <div class="form-group mb-3">
-                        <label for="profile_photo">Profile Photo:</label>
-                        <input type="file" class="form-control" id="profile_photo" name="profile_photo">
-                    </div> -->
-
-                    <h5>Profile</h5><br>
-
-                    <!-- Profile edit form -->
-                    <form id="editProfileForm" action="php/update_profile.php" method="POST" enctype="multipart/form-data">
-
-                        <!-- Input Foto Profil -->
-                        <!-- <div class="form-group mb-3">
-                            <label for="profile_photo">Upload Profile Photo</label>
-                            <input type="file" name="profile_photo" class="form-control" id="profile_photo">
-                        </div> -->
-
-                        <!-- Input Email -->
-                        <div class="form-group mb-3">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="&#xf0e0;   Email" required style="font-family: 'Arial', FontAwesome;">
-                        </div>
-
-                        <!-- Input Username -->
-                        <div class="form-group mb-3">
-                            <input type="text" class="form-control" id="username" name="username" placeholder="&#xf007;   Username" required style="font-family: 'Arial', FontAwesome;">
-                        </div>
-
-                        <!-- Input Password -->
-                        <div class="form-group mb-3">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="&#xf023;   New Password" style="font-family: 'Arial', FontAwesome;">
-                        </div>
-
-                        <!-- Input Confirm Password -->
-                        <div class="form-group mb-3">
-                            <input type="password" class="form-control" id="confirmPassword" name="confirm_password" placeholder="&#xf023;   Confirm Password" style="font-family: 'Arial', FontAwesome;">
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <!-- Icon Logout -->
-                    <button type="button" class="btn btn-danger me-auto" id="logoutBtn" style="border-radius: 10px;">
-                        <i class="fas fa-right-to-bracket"></i>
-                    </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" form="editProfileForm" class="btn btn-success" style="border-radius: 10px;">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById('logoutBtn').addEventListener('click', function() {
-            // Arahkan ke halaman logout atau lakukan proses logout
-            window.location.href = 'index.html'; // Ganti ini dengan URL atau script logout Anda
-        });
-    </script>
-
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
@@ -175,14 +94,13 @@ $result = $conn->query($query);
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="landing page.html" class="nav-item nav-link active">Beranda</a>
+                    <a href="index.html" class="nav-item nav-link active">Beranda</a>
                     <a href="#tentang-kami" class="nav-item nav-link">Tentang Kami</a>
-                    <a href="kamar.php" class="nav-item nav-link">Kamar</a>
+                    <a href="#service" class="nav-item nav-link">Layanan</a>
                     <a href="#paket" class="nav-item nav-link">Paket</a>
-                    <!-- <a href="pesanan.php" class="nav-item nav-link">Pesanan</a> -->
                     <a href="kontak.php" class="nav-item nav-link">Kontak</a>
-                    <a href="" style="font-size: large" class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#editProfileModal"><i class="fas fa-user me-2"></i><?php echo isset($_SESSION['nama']) ? $_SESSION['nama'] : 'Guest'; ?></a>
                 </div>
+                <a href="login.php" class="btn btn-success rounded-pill py-2 px-4">Register</a>
             </div>
         </nav>
 
@@ -237,7 +155,7 @@ $result = $conn->query($query);
                             <p class="mb-0"><i class="fa fa-arrow-right text-success me-2"></i>Kulkas</p>
                         </div>
                     </div>
-                    <a class="btn btn-success py-3 px-5 mt-2" href="kontak.php">Hubungi Kami</a>
+                    <a class="btn btn-success py-3 px-5 mt-2" href="">Pelajari Selengkapnya</a>
                 </div>
             </div>
         </div>
@@ -249,7 +167,7 @@ $result = $conn->query($query);
     <div class="container-xxl py-5" id="service">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-center text-success px-3">Layanan</h6>
+                <h6 class="section-title bg-white text-center text-success px-3">Services</h6>
                 <h1 class="mb-5">Layanan Kami</h1>
             </div>
             <div class="row g-4">
@@ -426,51 +344,99 @@ $result = $conn->query($query);
                     <!-- Package End -->
 
 
-                    <!-- Process Start -->
-                    <div class="container-xxl py-5">
-                        <div class="container">
-                            <div class="text-center pb-4 wow fadeInUp" data-wow-delay="0.1s">
-                                <h6 class="section-title bg-white text-center text-success px-3">Process</h6>
-                                <h1 class="mb-5">3 Easy Steps</h1>
+                    <!-- Booking Start -->
+                    <!-- <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="booking p-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-md-6 text-white">
+                        <h6 class="text-white text-uppercase">Booking</h6>
+                        <h1 class="text-white mb-4">Online Booking</h1>
+                        <p class="mb-4">Kami memahami bahwa mencari kost yang tepat bisa menjadi tugas yang melelahkan. Oleh karena itu, kami hadir dengan sistem booking online yang inovatif dan user-friendly. Dengan beberapa klik saja, Anda dapat menemukan, membandingkan, dan memesan kost impian Anda dari mana saja dan kapan saja. </p>
+                        <p class="mb-4">Nikmati kenyamanan dan kemudahan dalam mencari tempat tinggal yang sesuai dengan kebutuhan Anda tanpa harus keluar rumah.</p>
+                        <a class="btn btn-outline-light py-3 px-5 mt-2" href="">Baca Selengkapnya</a>
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="text-white mb-4">Pesan Kost</h1>
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control bg-transparent" id="name" placeholder="Your Name">
+                                        <label for="name">Your Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control bg-transparent" id="email" placeholder="Your Email">
+                                        <label for="email">Your Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating date" id="date3" data-target-input="nearest">
+                                        <input type="text" class="form-control bg-transparent datetimepicker-input" id="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" />
+                                        <label for="datetime">Date & Time</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control bg-transparent" id="name" placeholder="Your rooms">
+                                        <label for="name">Your Room</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control bg-transparent" placeholder="Special Request" id="message" style="height: 100px"></textarea>
+                                        <label for="message">Special Request</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-outline-light w-100 py-3" type="submit">Book Now</button>
+                                </div>
                             </div>
-                            <div class="row gy-5 gx-4 justify-content-center">
-                                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
-                                    <div class="position-relative border border-success pt-5 pb-4 px-4">
-                                        <div class="d-inline-flex align-items-center justify-content-center bg-success rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
-                                            <i class="fa fa-globe fa-3x text-white"></i>
-                                        </div>
-                                        <h5 class="mt-4">Choose A Room</h5>
-                                        <hr class="w-25 mx-auto bg-success mb-1">
-                                        <hr class="w-50 mx-auto bg-success mt-0">
-                                        <p class="mb-0">Pilihlah kamar impianmu dengan cepat secara online. </p>
-                                    </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+                    <!-- Booking Start -->
+
+
+
+                    <!-- Process Start -->
+
+                    <!-- Testimonial Start -->
+                    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s" id="testimonial">
+                        <div class="container">
+                            <div class="text-center">
+                                <h6 class="section-title bg-white text-center text-success px-3">Testimonial</h6>
+                                <h1 class="mb-5">Komentar</h1>
+                            </div>
+                            <div class="owl-carousel testimonial-carousel position-relative">
+                                <div class="testimonial-item bg-white text-center border p-4">
+                                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="asset/farros adi .jpg" style="width: 80px; height: 80px;">
+                                    <h5 class="mb-0">Farros Adi</h5>
+                                    <p>Mendit, Indonesia</p>
+                                    <p class="mb-0">Allah maha besar. YaAllah aku capek tolong berikan aku jalan keluar dan kemudahan yaallah. Al-Fatihah...</p>
                                 </div>
-                                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
-                                    <div class="position-relative border border-success pt-5 pb-4 px-4">
-                                        <div class="d-inline-flex align-items-center justify-content-center bg-success rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
-                                            <i class="fa fa-dollar-sign fa-3x text-white"></i>
-                                        </div>
-                                        <h5 class="mt-4">Pay Online</h5>
-                                        <hr class="w-25 mx-auto bg-success mb-1">
-                                        <hr class="w-50 mx-auto bg-success mt-0">
-                                        <p class="mb-0">Bayarlah kamar yang sudah anda pesan secara online.</p>
-                                    </div>
+                                <div class="testimonial-item bg-white text-center border p-4">
+                                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="asset/Purnama.jpg" style="width: 80px; height: 80px;">
+                                    <h5 class="mb-0">Purnama</h5>
+                                    <p>Tidar, Indonesia</p>
+                                    <p class="mt-2 mb-0">Top laptop selesaiin tugas dan penderitaanku SEKARANG!!!!!.</p>
                                 </div>
-                                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.5s">
-                                    <div class="position-relative border border-success pt-5 pb-4 px-4">
-                                        <div class="d-inline-flex align-items-center justify-content-center bg-success rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
-                                            <i class="fa fa-plane fa-3x text-white"></i>
-                                        </div>
-                                        <h5 class="mt-4">leaving today</h5>
-                                        <hr class="w-25 mx-auto bg-success mb-1">
-                                        <hr class="w-50 mx-auto bg-success mt-0">
-                                        <p class="mb-0">Berangkatlah di hari yang sesuai dengan pesanan anda.</p>
-                                    </div>
+                                <div class="testimonial-item bg-white text-center border p-4">
+                                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="asset/Malik.jpg" style="width: 80px; height: 80px;">
+                                    <h5 class="mb-0">Malik</h5>
+                                    <p>Bantaran, Indonesia</p>
+                                    <p class="mt-2 mb-0"><b>AKU CAPE.</b></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Process Start -->
+                    <!-- Testimonial End -->
+
 
                     <!-- Footer Start -->
                     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -526,7 +492,7 @@ $result = $conn->query($query);
                                         &copy; <a class="border-bottom" href="#">CozyKost</a>, All Right Reserved.
 
                                         <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                                        Designed By <a class="border-bottom" href="">Lebah Ganteng</a>
+                                        Designed By <a class="border-bottom" href="https://htmlcodex.com">Lebah Ganteng</a>
                                     </div>
                                     <div class="col-md-6 text-center text-md-end">
                                         <div class="footer-menu">

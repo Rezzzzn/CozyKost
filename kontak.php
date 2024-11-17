@@ -212,7 +212,7 @@ if (isset($_SESSION['nama'])) {
                     <!-- <a href="#tentang-kami" class="nav-item nav-link">Tentang Kami</a> -->
                     <a href="kamar.php" class="nav-item nav-link">Kamar</a>
                     <!-- <a href="#paket" class="nav-item nav-link">Paket</a> -->
-                    <a href="pesanan.php" class="nav-item nav-link">Pesanan</a>
+                    <!-- <a href="pesanan.php" class="nav-item nav-link">Pesanan</a> -->
                     <a href="kontak.php" class="nav-item nav-link active">Kontak</a>
                     <a href="" style="font-size: large" class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#editProfileModal"><i class="fas fa-user me-2"></i><?php echo isset($_SESSION['nama']) ? $_SESSION['nama'] : 'Guest'; ?></a>
                 </div>

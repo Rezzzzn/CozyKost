@@ -22,7 +22,7 @@ $transaction = [
     'customer_details' => [
         'first_name' => $customer_name,
         'email' => 'customer@example.com', // Ganti dengan email pelanggan
-        'phone' => '081234567890' // Ganti dengan nomor telepon pelanggan
+        // 'phone' => '081234567890' // Ganti dengan nomor telepon pelanggan
     ],
     'enabled_payments' => [$payment_method] // Aktifkan metode pembayaran yang dipilih
 ];
@@ -44,7 +44,7 @@ try {
         ),
     );
     
-    $snapToken = \Midtrans\Snap::getSnapToken($params);
+    $snapToken = \Midtrans\Snap::getSnapToken($transaction);
 
     // Kirimkan token Snap ke frontend
     echo json_encode(['token' => $snapToken]);

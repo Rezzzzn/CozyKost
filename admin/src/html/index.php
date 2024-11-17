@@ -1,6 +1,13 @@
 <?php
 session_start();
 include("../../../php/koneksi.php");
+
+// Query untuk mendapatkan total data
+$total_kost = $conn->query("SELECT COUNT(*) AS total FROM kost")->fetch_assoc();
+$total_kamar = $conn->query("SELECT COUNT(*) AS total FROM kamar WHERE status='tersedia'")->fetch_assoc();
+$total_pengguna = $conn->query("SELECT COUNT(*) AS total FROM tbl_login")->fetch_assoc();
+?>
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,9 +24,9 @@ include("../../../php/koneksi.php");
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
-        <!-- Sidebar Start -->
-        <?php include 'sidebar.php'; ?>
-        <!--  Sidebar End -->
+    <!-- Sidebar Start -->
+    <?php include 'sidebar.php'; ?>
+    <!--  Sidebar End -->
     <!--  Main wrapper -->
     <div class="body-wrapper">
       <!--  Header Start -->
@@ -88,20 +95,10 @@ include("../../../php/koneksi.php");
                         </div>
                         <h6 class="mb-0 fs-4 fw-medium text-muted">Total Kost</h6>
                       </div>
-                      <div class="dropdown dropstart">
-                        <a href="javascript:void(0)" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="ti ti-dots-vertical fs-6"></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <li><a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)"><i class="fs-4 ti ti-plus"></i>Add</a></li>
-                          <li><a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)"><i class="fs-4 ti ti-edit"></i>Edit</a></li>
-                          <li><a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)"><i class="fs-4 ti ti-trash"></i>Delete</a></li>
-                        </ul>
-                      </div>
                     </div>
                     <div class="row align-items-center">
                       <div class="col-6">
-                        <h2 class="mb-6 fs-8">456</h2>
+                        <h2 class="mb-6 fs-8"><?php echo $total_kost['total']; ?></h2>
                         <span class="badge rounded-pill border border-muted fw-bold text-muted fs-2 py-1">+23% bulan lalu</span>
                       </div>
                       <div class="col-6">
@@ -111,6 +108,7 @@ include("../../../php/koneksi.php");
                   </div>
                 </div>
               </div>
+
 
               <!-- Card 2 -->
               <div class="col-lg-4 col-md-6 mb-4">
@@ -123,20 +121,10 @@ include("../../../php/koneksi.php");
                         </div>
                         <h6 class="mb-0 fs-4 fw-medium text-muted">Total Kamar</h6>
                       </div>
-                      <div class="dropdown dropstart">
-                        <a href="javascript:void(0)" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="ti ti-dots-vertical fs-6"></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <li><a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)"><i class="fs-4 ti ti-plus"></i>Add</a></li>
-                          <li><a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)"><i class="fs-4 ti ti-edit"></i>Edit</a></li>
-                          <li><a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)"><i class="fs-4 ti ti-trash"></i>Delete</a></li>
-                        </ul>
-                      </div>
                     </div>
                     <div class="row align-items-center">
                       <div class="col-6">
-                        <h2 class="mb-6 fs-8">630</h2>
+                        <h2 class="mb-6 fs-8"><?php echo $total_kamar['total']; ?></h2>
                         <span class="badge rounded-pill border border-muted fw-bold text-muted fs-2 py-1">+18% bulan lalu</span>
                       </div>
                       <div class="col-6">
@@ -146,6 +134,7 @@ include("../../../php/koneksi.php");
                   </div>
                 </div>
               </div>
+
 
               <!-- Card 3 -->
               <div class="col-lg-4 col-md-6 mb-4">
@@ -158,20 +147,10 @@ include("../../../php/koneksi.php");
                         </div>
                         <h6 class="mb-0 fs-4 fw-medium text-muted">Total Pengguna</h6>
                       </div>
-                      <div class="dropdown dropstart">
-                        <a href="javascript:void(0)" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="ti ti-dots-vertical fs-6"></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <li><a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)"><i class="fs-4 ti ti-plus"></i>Add</a></li>
-                          <li><a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)"><i class="fs-4 ti ti-edit"></i>Edit</a></li>
-                          <li><a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)"><i class="fs-4 ti ti-trash"></i>Delete</a></li>
-                        </ul>
-                      </div>
                     </div>
                     <div class="row align-items-center">
                       <div class="col-6">
-                        <h2 class="mb-6 fs-8">780</h2>
+                        <h2 class="mb-6 fs-8"><?php echo $total_pengguna['total']; ?></h2>
                         <span class="badge rounded-pill border border-muted fw-bold text-muted fs-2 py-1">+12% bulan lalu</span>
                       </div>
                       <div class="col-6">
@@ -181,6 +160,7 @@ include("../../../php/koneksi.php");
                   </div>
                 </div>
               </div>
+
             </div>
 
             <!-- Row for Penjualan Kost -->

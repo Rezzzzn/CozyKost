@@ -53,7 +53,7 @@ include("../../../php/koneksi.php");
           </li>
 
           <!-- Kamar Section -->
-          <?php if ($_SESSION['level'] == 1) { ?>
+          <?php if ($_SESSION['level'] == 2) { ?>
             <li class="sidebar-item">
               <a class="sidebar-link" href="kost.php" aria-expanded="false">
                 <iconify-icon icon="mdi:home-outline"></iconify-icon>
